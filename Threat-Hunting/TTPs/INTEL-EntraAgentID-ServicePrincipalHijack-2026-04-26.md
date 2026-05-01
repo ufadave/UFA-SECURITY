@@ -18,7 +18,7 @@
 | **Secondary Techniques** | T1078.004 — Valid Accounts: Cloud Accounts · T1136.003 — Create Account: Cloud Account                                                                                                                                                                 |
 | **Detection Candidate**  | ✅ YES                                                                                                                                                                                                                                                  |
 | **Patch Available**      | ✅ YES — Microsoft patched April 9 2026                                                                                                                                                                                                                 |
-| Tags                     | #action-required #export                                                                                                                                                                                                                               |
+| Tags                     | #action-required #converted-docx                                                                                                                                                                                                                       |
 
 ---
 

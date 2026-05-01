@@ -3,7 +3,7 @@ date: 2026-04-29 22:28
 case_id: INC-2026-04292228
 severity: ""
 type: ""
-status: "Open"
+status: Open
 closed: ""
 tags:
   - "#ir"

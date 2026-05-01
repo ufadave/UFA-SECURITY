@@ -8,6 +8,7 @@ tags:
   - "#detection"
   - "#status/active"
   - "#action-required"
+  - "High"
 detection_candidate: true
 ---
 
