@@ -1,6 +1,6 @@
 ---
-date: 2026-04-29 22:28
-case_id: INC-2026-04292228
+date: <% tp.date.now("YYYY-MM-DD HH:mm") %>
+case_id: INC-<% tp.date.now("YYYY-MMDDHHmm") %>
 severity: ""
 type: ""
 status: "Open"
@@ -10,7 +10,7 @@ tags:
   - "#status/active"
 ---
 
-# Incident — Incident Case Template
+# Incident — <% tp.file.title.replace("IR-", "").replaceAll("-", " ") %>
 
 ---
 
@@ -22,7 +22,7 @@ tags:
 ## Timeline
 | Timestamp (UTC) | Event |
 |-----------------|-------|
-| 2026-04-29 22:28 | Incident opened |
+| <% tp.date.now("YYYY-MM-DD HH:mm") %> | Incident opened |
 
 ---
 
@@ -64,4 +64,4 @@ tags:
 ## Changelog
 | Date | Change |
 |------|--------|
-| 2026-04-29 | Created |
+| <% tp.date.now("YYYY-MM-DD") %> | Created |

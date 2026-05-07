@@ -9,7 +9,7 @@ tags:
   - "#supply-chain"
   - "#status/review"
   - "#action-required"
-  - "export"
+  - "#export"
 ---
 
 # Claude Code — Risk Profile for Environment Use
