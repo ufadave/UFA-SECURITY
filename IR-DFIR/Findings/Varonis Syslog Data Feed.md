@@ -1,20 +1,20 @@
 ---
 title: Untitled
-date: 2026-04-29
+date: 2026-05-05
 case_id:
 alert_id:
 severity: <!--- Low | Medium | High | Critical --->
 status: open
 tags:
   - "#ir"
-  - "#finding"
+  - "#support"
   - "#status/draft"
 ---
 
-# Untitled
+# Varonis Syslog Data Feed not working
 
-**Date:** 2026-04-29 23:07
-**Analyst:** 
+**Date:** 2026-05-05 13:03
+**Analyst:** David Coombe
 **Severity:** 
 **Status:** Open
 
@@ -22,26 +22,25 @@ tags:
 
 ## Source
 
-| Field | Value |
-|-------|-------|
-| Alert / Signal | |
-| Platform | <!--- MDE \| Sentinel \| MDO \| MCAS \| Manual --->  |
-| Affected Asset(s) | |
-| Affected User(s) | |
-| Detection Time | |
-| Triage Time | |
+| Field             | Value   |
+| ----------------- | ------- |
+| Alert / Signal    |         |
+| Platform          | Varonis |
+| Affected Asset(s) |         |
+| Affected User(s)  |         |
+| Detection Time    |         |
+| Triage Time       |         |
 
 ---
 
 ## Observation
 
-<!-- What did you see? Raw signal, alert title, or hunting result. 2-4 sentences. -->
 
 ---
 
 ## Investigation Notes
 
-<!-- What did you do? Pivots, queries run, correlated events. Use sub-headings if needed. -->
+<!We've been getting alerts about missing syslog feeds. Can't find any traffic in the firewall logs, so I've opened a ticket (**INC13863656**) with Network Support. >
 
 ### KQL Pivots
 
@@ -100,4 +99,4 @@ tags:
 
 | Date | Change |
 |------|--------|
-| 2026-04-29 | Finding created |
+| 2026-05-05 | Finding created |
