@@ -12,8 +12,11 @@ mitre_techniques:
 detection_candidate: true
 promoted_to_rule: false
 sentinel_rule_id: ""
+promoted_kql_notes:
+  - "[[KQL-CloudAppEvents-AppOnly-BulkMailboxAccess-Graph]]"
+  - "[[KQL-AuditLogs-GraphPermissionGrant-ServicePrincipal]]"
+  - "[[KQL-SigninLogs-AppOnly-NonInteractive-Anomaly]]"
 tags:
-  - "#Enumeration"
   - "#intel"
   - "#cloud"
   - "#identity"
@@ -62,34 +65,16 @@ The toolkit is explicitly designed to minimize audit footprint by pre-loading UP
 ### KQL Stubs
 
 **Sentinel / CloudAppEvents — App-only bulk mailbox access**
-```kql
-CloudAppEvents
-| where ActionType == "MailItemsAccessed"
-| where ApplicationId != "" // app-only — no delegated user
-| summarize MailboxCount = dcount(AccountObjectId), AccessCount = count() 
-    by ApplicationId, ApplicationDisplayName, bin(Timestamp, 1h)
-| where MailboxCount > 10
-| order by MailboxCount desc
-```
-> **Schema note:** Validate `ApplicationId` and `AccountObjectId` availability in your `CloudAppEvents` table. Column names can vary. Cross-reference with `AuditLogs` (`Microsoft.Graph` category) for Graph-sourced events.
+→ Promoted to [[KQL-CloudAppEvents-AppOnly-BulkMailboxAccess-Graph]] (2026-05-03)
+> Schema correction: `ApplicationId != ""` replaced with `AccountType == "Application"`. `ApplicationId` is `int` type. `OAuthAppId` is the correct OAuth app identifier field.
 
-**Sentinel / AuditLogs — Broad Graph API delegated or app permissions granted**
-```kql
-AuditLogs
-| where OperationName == "Add app role assignment to service principal"
-| where TargetResources has_any ("Mail.Read", "Files.Read.All", "Sites.Read.All", "User.Read.All")
-| project TimeGenerated, InitiatedBy, TargetResources, Result
-```
+**Sentinel / AuditLogs — Broad Graph API permissions granted**
+→ Promoted to [[KQL-AuditLogs-GraphPermissionGrant-ServicePrincipal]] (2026-05-03)
+> Expanded permission list. Added `mv-expand` logic to extract specific permission name from `ModifiedProperties`.
 
 **Sentinel / SigninLogs — Application sign-in anomaly (non-interactive)**
-```kql
-SigninLogs
-| where IsInteractive == false
-| where AppId !in (known_good_app_ids) // maintain allowlist
-| where ResultType == 0
-| summarize count() by AppId, AppDisplayName, IPAddress, UserAgent
-| where count_ > 50
-```
+→ Promoted to [[KQL-SigninLogs-AppOnly-NonInteractive-Anomaly]] (2026-05-03)
+> Primary table changed to `AADNonInteractiveUserSignInLogs`. Detection logic reframed around unknown app identity rather than volume threshold.
 
 ### Validated Columns (to verify in your environment)
 - [ ] `CloudAppEvents.ActionType` — confirm "MailItemsAccessed" fires for app-only access

@@ -12,6 +12,8 @@ tags:
   - "#endpoint"
   - "#status/draft"
   - "#action-required"
+  - "#Agentic"
+  - "#AI"
 ---
 
 # INFO — Careful Adoption of Agentic AI Services (Five Eyes Joint Guidance)

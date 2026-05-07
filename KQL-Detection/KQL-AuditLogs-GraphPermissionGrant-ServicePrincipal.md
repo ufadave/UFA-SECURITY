@@ -2,7 +2,7 @@
 title: "Broad Graph API Permission Grant to Service Principal (AuditLogs)"
 date: 2026-05-03
 source_intel: "[[INTEL-M365Pwned-OAuth-Enumeration-Exfiltration-Toolkit]]"
-schema: AuditLogs
+schema: "AuditLogs, AADNonInteractiveUserSignInLogs, SigninLogs"
 context: Sentinel (Log Analytics)
 mitre_tactics:
   - Persistence
@@ -19,6 +19,7 @@ tags:
   - "#identity"
   - "#status/draft"
   - "#action-required"
+  - "#Graph"
 ---
 
 # KQL — Broad Graph API Permission Grant to Service Principal
@@ -133,6 +134,58 @@ CloudAppEvents
 
 ---
 
+### Supplementary — Non-Interactive Token Refresh Cadence (AADNonInteractiveUserSignInLogs)
+
+Detects automated token refresh patterns consistent with an attacker maintaining a long-duration AiTM session. Silent OAuth token refresh events land in `AADNonInteractiveUserSignInLogs`, not `SigninLogs` — this is the correct table for detecting background token activity.
+
+Use this query alongside the permission grant detection to determine whether a compromised account had an active attacker-maintained token during the period when suspicious grants were made.
+
+```kql
+// Table: AADNonInteractiveUserSignInLogs
+// Schema: Sentinel / Log Analytics
+// Purpose: Summarise non-interactive sign-in pattern by week to surface automated
+//          token refresh cadence consistent with attacker-maintained AiTM session
+//          Silent OAuth token refresh events land here — SigninLogs captures
+//          interactive sign-ins only
+// Usage: Replace UserId with the account object ID under investigation
+AADNonInteractiveUserSignInLogs
+| where TimeGenerated between (datetime(2025-12-01T00:00:00Z) .. datetime(2026-05-05T02:22:00Z))
+| where UserId == "REPLACE-WITH-ACCOUNT-OBJECT-ID"
+| where ResultType == 0
+| extend DeviceDetailParsed = parse_json(DeviceDetail)
+| extend IsCompliant = tostring(DeviceDetailParsed.isCompliant)
+| extend HourOfDay = hourofday(TimeGenerated)
+| extend OutsideBusinessHours = HourOfDay < 7 or HourOfDay > 19
+| extend WeekNumber = week_of_year(TimeGenerated)
+| summarize
+    SignInsThisWeek   = count(),
+    OutsideHoursCount = countif(OutsideBusinessHours == true),
+    NonCompliantCount = countif(IsCompliant != "true"),
+    UniqueIPs         = dcount(IPAddress),
+    UniqueLocations   = dcount(Location),
+    UniqueApps        = dcount(AppDisplayName),
+    FirstSignIn       = min(TimeGenerated),
+    LastSignIn        = max(TimeGenerated)
+    by WeekNumber
+| extend OutsideHoursPct  = round(100.0 * OutsideHoursCount / SignInsThisWeek, 1)
+| extend NonCompliantPct  = round(100.0 * NonCompliantCount / SignInsThisWeek, 1)
+| order by WeekNumber asc
+```
+
+**What to look for:**
+- Consistent `OutsideHoursPct` above 50% sustained across multiple weeks — legitimate user background activity is mixed; attacker-maintained refresh tends to occur at consistent off-hours intervals
+- `NonCompliantPct` near 100% — AiTM proxy sessions originate from non-compliant devices
+- Low `UniqueIPs` (1–2) combined with anomalous `UniqueLocations` — automated refresh from fixed attacker infrastructure
+- Unnervingly regular `FirstSignIn` / `LastSignIn` intervals week over week — automated refresh often runs on a fixed schedule
+
+> ⚠️ **Volume note:** `AADNonInteractiveUserSignInLogs` generates significantly higher event volume than `SigninLogs` — every background token refresh from every Office app lands here. The weekly summarise aggregation is intentional. Do not expand to per-event without a tight time window and UserId filter.
+
+> ⚠️ **Retention note:** Confirm `AADNonInteractiveUserSignInLogs` was streaming via the Entra ID data connector for the full investigation window. Check `Sentinel > Data connectors > Azure Active Directory` if the table returns unexpected gaps.
+
+> ⚠️ **Schema note:** `DeviceDetail` is stored as a JSON string in this table — `parse_json(DeviceDetail)` is required before property navigation. Direct dot-access (`DeviceDetail.isCompliant`) will produce a type error.
+
+---
+
 ## Validated Columns
 
 - [ ] `AuditLogs.OperationName` — confirm `"Add app role assignment to service principal"` (exact string, case-sensitive)
@@ -142,6 +195,10 @@ CloudAppEvents
 - [ ] `AuditLogs.InitiatedBy.app.displayName` — confirm populated for app-initiated grants
 - [ ] `AuditLogs.Result` — confirm `"success"` value (vs `"failure"`)
 - [ ] `mv-expand ModifiedProps` — validate the expanded structure matches your tenant's audit event format; run a sample query first
+- [ ] `AADNonInteractiveUserSignInLogs.DeviceDetail` — stored as JSON string; `parse_json()` required before property navigation — confirmed fix applied in query above
+- [ ] `AADNonInteractiveUserSignInLogs.IsCompliant` — extracted via `parse_json(DeviceDetail).isCompliant`; confirm boolean vs string handling returns `"true"` / `"false"` strings in your tenant
+- [ ] `AADNonInteractiveUserSignInLogs.Location` — confirm field populated and consistent with `SigninLogs.Location` for `dcount` accuracy
+- [ ] `AADNonInteractiveUserSignInLogs` — confirm table is present and streaming via Entra ID data connector before relying on absence of results as a negative signal
 
 ### Pre-deployment Validation Query
 Run this first to inspect raw event structure before applying the full logic:
@@ -189,6 +246,9 @@ AuditLogs
 - [ ] `PermissionGranted` extracts correct permission name
 - [ ] InitiatorUPN populated correctly for human-initiated grants
 - [ ] CloudAppEvents supplementary query validated in Advanced Hunting
+- [ ] AADNonInteractiveUserSignInLogs — confirmed table is streaming and populated
+- [ ] AADNonInteractiveUserSignInLogs — parse_json(DeviceDetail) confirmed working; IsCompliant extracts correctly
+- [ ] AADNonInteractiveUserSignInLogs — weekly summary query run against known compromised account; output reviewed
 - [ ] False positive rate assessed over 7d
 - [ ] Deployed to Sentinel
 
@@ -202,6 +262,9 @@ AuditLogs
 
 ## Related Notes
 - [[INTEL-M365Pwned-OAuth-Enumeration-Exfiltration-Toolkit]] — source intel
+- [[INTEL-Tycoon2FA-AiTM-PhaaS-Platform]] — AiTM platform context for token refresh pattern
+- [[HUNT-Long-Duration-AiTM-Token-Access-Graph-Recon]] — hunt campaign using AADNonInteractiveUserSignInLogs query
+- [[FIND-Graph-API-User-Enumeration-Sweden-Central]] — triggering incident
 - [[KQL-CloudAppEvents-AppOnly-BulkMailboxAccess-Graph]] — companion rule
 - [[KQL-SigninLogs-AppOnly-NonInteractive-Anomaly]] — companion rule
 - [[HARD-Entra-App-Registration-Permissions-Audit]]
@@ -212,3 +275,4 @@ AuditLogs
 | Date | Change |
 |---|---|
 | 2026-05-03 | Stage 1 (Candidate) — promoted from INTEL-M365Pwned stub. Expanded permission list beyond original 4 entries. Added mv-expand logic for ModifiedProps to extract specific permission granted. Added CloudAppEvents supplementary query. Noted AuditLogs-only context (not Advanced Hunting). |
+| 2026-05-05 | Added AADNonInteractiveUserSignInLogs supplementary query for AiTM token refresh cadence detection. Updated schema frontmatter. Added validated column entries and test checkboxes for new query. Added related note links for INTEL-Tycoon2FA, HUNT-Long-Duration-AiTM, and FIND-Graph-API-User-Enumeration-Sweden-Central. Schema note added re: parse_json requirement on DeviceDetail in non-interactive table. |
