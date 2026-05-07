@@ -107,10 +107,15 @@ CloudAppEvents
 ```
 
 ### Validated Columns
-- [ ] `AccountType` — confirm `"Application"` value in `CloudAppEvents` for app-only access in your tenant
-- [ ] `ApplicationId` — confirm column name in `CloudAppEvents` (may be `AppId` in some schemas)
-- [ ] `ObjectName` — confirm this reflects mailbox UPN or file path in `CloudAppEvents`
-- [ ] `ActionType == "MailItemsAccessed"` — confirm this action type is generated for app-level Graph access (requires M365 Audit enabled)
+- [x] `AccountType` — confirm `"Application"` value in `CloudAppEvents` for app-only access in your tenant 
+-   There is no account type of Application only Regular and Admin
+
+- [x] `ApplicationId` — confirm column name in `CloudAppEvents` (may be `AppId` in some schemas)
+	- ApplicationId exists as a column name. 
+- [x] `ObjectName` — confirm this reflects mailbox UPN or file path in `CloudAppEvents
+-  it does represent File path if the object type is File. If the object type is Email the object name appears to be the Subject of the email. 
+- [x] `ActionType == "MailItemsAccessed"` — confirm this action type is generated for app-level Graph access (requires M365 Audit enabled)
+-  If ObjectType == 'Email' the ActionTypes are "MoveToDeletedItems,Create, SoftDelete and Update"
 - [ ] `AuditLogs` — confirm M365 audit logs are flowing to Sentinel workspace
 
 ---

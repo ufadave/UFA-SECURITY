@@ -284,6 +284,6 @@ LIMIT 2
 ## 📌 Active Work
 > Update manually with current focus items
 
-- [ ] 
+- [ ] [[INTEL-M365Pwned-OAuth-App-Token-Exfiltration-Toolkit]]
 - [ ] 
 - [ ] 
