@@ -13,7 +13,7 @@ tags:
   - "#detection/hunting"
   - "#endpoint"
   - "#identity"
-  - "#status/draft"
+  - "#status/done"
 ---
 
 # HUNTING — net user password change

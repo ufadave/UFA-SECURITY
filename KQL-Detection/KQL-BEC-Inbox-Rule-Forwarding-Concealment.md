@@ -6,13 +6,13 @@ schema: "Sentinel / Log Analytics"
 mitre: "T1114.003, T1137.005, T1078.004"
 tactic: "Collection, Persistence, Defence Evasion"
 technique: "Email Forwarding Rule, Office Application Startup: Outlook Rules, Valid Accounts: Cloud Accounts"
-status: "Draft"
-promoted_to_rule: false
-sentinel_rule_id: ""
+status: "deployed"
+promoted_to_rule: true
+sentinel_rule_id: "467e3a19-0fff-443a-8c46-dd06a8b23ddd"
 tags:
   - "#detection"
   - "#detection/analytics-rule"
-  - "#status/draft"
+  - "#status/active"
   - "#identity"
   - "#email"
   - "#cloud"
@@ -165,14 +165,14 @@ OfficeActivity
 
 ## Validated Columns
 
-- [ ] `OfficeActivity.Operation` — confirm `"New-InboxRule"`, `"Set-InboxRule"`, `"UpdateInboxRules"`, `"Set-Mailbox"` exact strings match events in your tenant
-- [ ] `OfficeActivity.Parameters` — confirm dynamic array; `parse_json()` required before `mv-expand`
-- [ ] `Parsed.Name` / `Parsed.Value` — confirm field names within the Parameters array match your tenant's event format; run pre-deployment structure query below to inspect
-- [ ] `ParamName` values — confirm `"ForwardTo"`, `"RedirectTo"`, `"ForwardingSmtpAddress"`, `"DeleteMessage"` appear in your tenant's `Parameters` array for rule operations
-- [ ] `OfficeActivity.ClientIP` — confirm field populated for rule creation events
-- [ ] `OfficeActivity.UserId` — confirm format (UPN vs object ID) for entity mapping in Sentinel rule
-- [ ] `set_difference()` — confirm function available in your Sentinel workspace KQL version
-- [ ] `bin(TimeGenerated, 5m)` — confirm summarise grouping produces expected row count vs raw event count
+- [x] `OfficeActivity.Operation` — confirm `"New-InboxRule"`, `"Set-InboxRule"`, `"UpdateInboxRules"`, `"Set-Mailbox"` exact strings match events in your tenant
+- [x] `OfficeActivity.Parameters` — confirm dynamic array; `parse_json()` required before `mv-expand`
+- [x] `Parsed.Name` / `Parsed.Value` — confirm field names within the Parameters array match your tenant's event format; run pre-deployment structure query below to inspect
+- [x] `ParamName` values — confirm `"ForwardTo"`, `"RedirectTo"`, `"ForwardingSmtpAddress"`, `"DeleteMessage"` appear in your tenant's `Parameters` array for rule operations
+- [x] `OfficeActivity.ClientIP` — confirm field populated for rule creation events
+- [x] `OfficeActivity.UserId` — confirm format (UPN vs object ID) for entity mapping in Sentinel rule
+- [x] `set_difference()` — confirm function available in your Sentinel workspace KQL version
+- [x] `bin(TimeGenerated, 5m)` — confirm summarise grouping produces expected row count vs raw event count
 
 ### Parameters Structure Inspection Query
 
@@ -190,14 +190,14 @@ OfficeActivity
 
 ## Test Results
 
-- [ ] Parameters structure inspection query run — `Parsed.Name` / `Parsed.Value` field names confirmed
-- [ ] Pre-deployment baseline query run against 30d lookback — results reviewed
-- [ ] Results before 2026-05-05 investigated if any returned
-- [ ] `ForwardDest` set confirmed empty strings stripped correctly
-- [ ] `RuleActions` set confirmed populated with correct param names
-- [ ] Internal domain exclusion filter populated and uncommented if needed
-- [ ] False positive rate assessed over 7 days in report-only mode
-- [ ] Deployed to Sentinel as scheduled analytics rule
+- [x] Parameters structure inspection query run — `Parsed.Name` / `Parsed.Value` field names confirmed
+- [x] Pre-deployment baseline query run against 30d lookback — results reviewed
+- [x] Results before 2026-05-05 investigated if any returned
+- [x] `ForwardDest` set confirmed empty strings stripped correctly
+- [x] `RuleActions` set confirmed populated with correct param names
+- [x] Internal domain exclusion filter populated and uncommented if needed
+- [x] False positive rate assessed over 7 days in report-only mode
+- [x] Deployed to Sentinel as scheduled analytics rule
 
 ---
 
@@ -212,7 +212,7 @@ OfficeActivity
 - **MITRE Tactics:** Collection, Persistence, Defence Evasion
 - **MITRE Techniques:** T1114.003, T1137.005, T1078.004
 - **Suppression:** None — every forwarding + concealment rule warrants review
-- **Deployed:** [ ]
+- **Deployed:** [ x ]
 
 > **Deployment note:** No allowlist by default. If chronic FPs emerge from a known-good provisioning workflow or legitimate external forwarding, add a domain-based exclusion scoped to that specific destination rather than suppressing the rule broadly. Uncomment the domain filter in the query and populate with your internal domains as a first noise-reduction step.
 

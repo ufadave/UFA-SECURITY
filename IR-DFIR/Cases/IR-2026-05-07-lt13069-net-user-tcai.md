@@ -2,16 +2,16 @@
 title: "IR-2026-05-07-lt13069-net-user-tcai"
 date: 2026-05-07
 case_id: IR-2026-05-07-lt13069-01
-alert_id: 
+alert_id: 145243
 severity: Medium
-status: review
+status: done
 tags:
   - "#ir"
   - "#finding"
   - "#endpoint"
   - "#identity"
-  - "#action-required"
-  - "#status/review"
+  - "#status/done"
+  - "#net.exe"
 ---
 
 # IR-2026-05-07-lt13069-net-user-tcai
@@ -110,17 +110,19 @@ DeviceProcessEvents
           ProcessIntegrityLevel
 | sort by Timestamp desc
 ```
-
+Pivot 1 returned 12 rows multiple users. 
 ```kql
 // 2. Anyone touching the tcai account anywhere in the estate — last 30 days
 DeviceProcessEvents
 | where Timestamp > ago(30d)
 | where ProcessCommandLine has "tcai"
+| where AccountName != 'tcai'
 | project Timestamp, DeviceName, AccountName, ProcessCommandLine,
           InitiatingProcessFileName
 | sort by Timestamp desc
 ```
-
+Pivot 2 - Modified query to exclude 'tcai'
+        - only returned tsandqui net.exe activity on the 6th.
 ```kql
 // 3. Did tcai actually log on to lt13069 around or after this time?
 //    Confirms whether tcai is a local account on this device.
@@ -131,7 +133,7 @@ DeviceLogonEvents
 | project Timestamp, LogonType, ActionType, RemoteDeviceName, RemoteIP
 | sort by Timestamp desc
 ```
-
+Pivot 3 - No rows returned
 ```kql
 // 4. Any local account add/modify on this host? (lateral expansion check)
 DeviceProcessEvents
@@ -142,7 +144,7 @@ DeviceProcessEvents
 | project Timestamp, AccountName, ProcessCommandLine
 | sort by Timestamp desc
 ```
-
+Pivot 4 returned 0 rows
 ```kql
 // 5. SecurityEvent corroboration — did the password change actually succeed?
 //    4723 = self-service change, 4724 = admin reset, 4738 = account modified,
@@ -150,12 +152,24 @@ DeviceProcessEvents
 //    4720 = account created, 4726 = account deleted
 SecurityEvent
 | where TimeGenerated > datetime(2026-05-06)
-| where Computer startswith "lt13069"
+| where WorkStationName startswith "lt13069"
 | where EventID in (4625, 4720, 4723, 4724, 4726, 4738)
 | project TimeGenerated, EventID, Activity, TargetAccount, SubjectAccount
 | sort by TimeGenerated desc
 ```
-
+Pivot 5 Returned 0 rows
+```kql
+// Pivot 6 — full child-process history of tsandqui's cmd.exe session
+DeviceProcessEvents
+| where Timestamp between (datetime(2026-05-06 14:43:00) .. datetime(2026-05-06 23:59:59))
+| where DeviceName == "lt13069.ad.corp.local"
+| where InitiatingProcessFileName =~ "cmd.exe"
+| where InitiatingProcessAccountName == "tsandqui"
+| project Timestamp, FileName, ProcessCommandLine, ProcessIntegrityLevel
+| sort by Timestamp asc
+```
+ 
+Pivot 6 returned net.exe activity and whoami / groups which does jive with the users story. He also ran sudo with no parameters. 
 ### Timeline (UTC offsets unverified — times as recorded in MDE)
 
 | Time | Event |
@@ -169,10 +183,13 @@ SecurityEvent
 ### Key Questions for Follow-up
 
 1. **Did the password change succeed?** Pivot 5 (`SecurityEvent` corroboration) answers this directly. If 4724 or 4738 appears for `tcai` at 15:16:31, the change committed. If 4625 or no SAM-modification event appears, the command likely failed due to insufficient rights.
+     Did not succeed. 
 2. **Does `tsandqui` have local admin on `lt13069`?** If yes — separate hardening conversation about local admin distribution to non-IT roles. A financial analyst with local admin is a finding in its own right.
+     Does not have local admin
 3. **Is `tcai` a local-only account, or shared/used elsewhere?** Pivot 3 confirms local logon history. If `tcai` is also a domain account used at other endpoints (POS, OT, shared kiosk), scope expands accordingly.
+   No to both
 4. **Has `tsandqui` done this before?** Pivot 1 surfaces 30-day history. A clean history reduces this to a one-off; any pattern materially escalates the finding.
-
+     He hasn't done this before. 
 ---
 
 ## Assessment
@@ -190,25 +207,25 @@ SecurityEvent
 
 ## MITRE ATT&CK
 
-| Field | Value |
-|-------|-------|
-| Tactic | TA0003 — Persistence / TA0004 — Privilege Escalation |
-| Technique | T1098 — Account Manipulation |
+| Field         | Value                                                    |
+| ------------- | -------------------------------------------------------- |
+| Tactic        | TA0003 — Persistence / TA0004 — Privilege Escalation     |
+| Technique     | T1098 — Account Manipulation                             |
 | Sub-technique | (none — local SAM password change is the base technique) |
 
 ---
 
 ## Actions Taken
 
-- [ ] Run pivot 5 (`SecurityEvent` 4723/4724/4738/4625) — confirm whether password change committed or failed
-- [ ] Run pivot 3 (`DeviceLogonEvents`) — confirm `tcai` is local account on `lt13069`
-- [ ] Run pivot 1 (`tsandqui` `net.exe` history) — confirm one-off vs. pattern
-- [ ] If change committed: notify `tcai`, force password reset to value unknown to `tsandqui`
-- [ ] If `tcai` is shared/used elsewhere: scope expansion (POS, OT, kiosk usage)
-- [ ] Confirm `tsandqui` local admin status on `lt13069` (independent finding if true)
+- [x] Run pivot 5 (`SecurityEvent` 4723/4724/4738/4625) — confirm whether password change committed or failed
+- [x] Run pivot 3 (`DeviceLogonEvents`) — confirm `tcai` is local account on `lt13069`
+- [x] Run pivot 1 (`tsandqui` `net.exe` history) — confirm one-off vs. pattern
+- [x] If change committed: notify `tcai`, force password reset to value unknown to `tsandqui`
+- [x] If `tcai` is shared/used elsewhere: scope expansion (POS, OT, kiosk usage)
+- [x] Confirm `tsandqui` local admin status on `lt13069` (independent finding if true)
 - [ ] Capture user statement verbatim in writing (not just analyst paraphrase)
 - [ ] Engage IT manager and HR — policy violation regardless of execution outcome
-- [ ] Document final disposition and close
+- [x] Document final disposition and close
 
 ---
 
@@ -225,7 +242,8 @@ SecurityEvent
 ## Related Notes
 
 - [[KQL-net-user-password-change]] — reusable hunt this finding seeded; this case becomes the documented sample positive
-
+- [[KQL - HUNTING Net1 Net activity]]
+ 
 ---
 
 ## Changelog
