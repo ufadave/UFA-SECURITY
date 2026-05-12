@@ -138,10 +138,10 @@ SORT file.mtime DESC
 
 ## ✅ Deployed — MDE Custom Detection Rules
 ```dataview
-TABLE mde_rule_id AS "Rule ID", mitre AS "MITRE", file.mtime AS "Deployed"
+TABLE mde_rule_name AS "Rule Name", mitre AS "MITRE", file.mtime AS "Deployed"
 FROM #detection
 WHERE promoted_to_rule = true
-AND mde_rule_id != "" AND mde_rule_id != null
+AND mde_rule_name != "" AND mde_rule_name != null
 AND !contains(file.path, "_Templates")
 SORT file.mtime DESC
 ```
