@@ -7,14 +7,16 @@ mitre: T1098
 tactic: TA0003 / TA0004
 technique: T1098 — Account Manipulation
 status: Draft
-mde
+
 promoted_to_rule: true
+mde_rule_name: "Hunting - net user password change"
 sentinel_rule_id: ""
 tags:
   - "#detection/hunting"
   - "#endpoint"
   - "#identity"
   - "#status/deployed"
+  - 
 ---
 
 # HUNTING — net user password change

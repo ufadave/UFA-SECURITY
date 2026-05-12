@@ -11,9 +11,9 @@ promoted_to_rule: true
 mde_rule_name: "Hunting - NonInteractive Sign-ins by Account"
 sentinel_rule_id: ""
 tags:
-  - "#detection/hunting"
+  - "#detection"
   - "#status/deployed"
-  
+  - ""
 ---
 
 # Hunting - NonInteractive Sign-ins by Account
