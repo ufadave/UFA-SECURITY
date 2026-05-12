@@ -3,7 +3,7 @@ title: Untitled
 date: 2026-05-05
 case_id:
 alert_id:
-severity: <!--- Low | Medium | High | Critical --->
+severity: <!--- Low  --->
 status: open
 tags:
   - "#ir"
@@ -34,7 +34,7 @@ tags:
 ---
 
 ## Observation
-
+We're receiving emails from Varonis about the GlobalProtect Syslog being down. I created a ticket INC and assigned it to the Network team. Keith 
 
 ---
 
