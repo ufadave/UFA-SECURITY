@@ -80,15 +80,15 @@ DeviceProcessEvents
 
 ## Validated Columns
 
-- [ ] `Timestamp` — event time
-- [ ] `DeviceName` — host where the command ran
+- [x] `Timestamp` — event time
+- [x] `DeviceName` — host where the command ran
 - [ ] `AccountDomain` / `AccountName` — initiator (the user running `net.exe`)
-- [ ] `ProcessCommandLine` — full command for regex match and target extraction
-- [ ] `FileName` — `net.exe` or `net1.exe`
-- [ ] `ProcessIntegrityLevel` — Medium IL flagging non-elevated execution
-- [ ] `InitiatingProcessFileName` — parent process (expect `cmd.exe`, `powershell.exe`)
-- [ ] `InitiatingProcessParentFileName` — grandparent for lineage context
-- [ ] `ReportId` — for unique row reference
+- [x] `ProcessCommandLine` — full command for regex match and target extraction
+- [x] `FileName` — `net.exe` or `net1.exe`
+- [x] `ProcessIntegrityLevel` — Medium IL flagging non-elevated execution
+- [x] `InitiatingProcessFileName` — parent process (expect `cmd.exe`, `powershell.exe`)
+- [x] `InitiatingProcessParentFileName` — grandparent for lineage context
+- [x] `ReportId` — for unique row reference
 
 ---
 
