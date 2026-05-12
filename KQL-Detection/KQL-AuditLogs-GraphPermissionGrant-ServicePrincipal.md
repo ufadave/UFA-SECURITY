@@ -17,11 +17,11 @@ tags:
   - "#detection/analytics-rule"
   - "#cloud"
   - "#identity"
-  - "#status/draft"
-  - "#action-required"
-  - "#Graph"
+  - "#status/done"
+  -  "#Graph"
 ---
 
+Not exactly done as I couldn't confirm that there's an operation name called "Add app role assignment to service principal"
 # KQL — Broad Graph API Permission Grant to Service Principal
 
 ## Purpose
@@ -188,7 +188,7 @@ AADNonInteractiveUserSignInLogs
 
 ## Validated Columns
 
-- [ ] `AuditLogs.OperationName` — confirm `"Add app role assignment to service principal"` (exact string, case-sensitive)
+- [ ] `AuditLogs.OperationName` — confirm `"Add app role assignment to service principal"` (exact string, case-sensitive) - Could not confirm 
 - [ ] `AuditLogs.TargetResources` — confirm dynamic array; `[0]` indexing valid for your events
 - [ ] `AuditLogs.TargetResources[0].modifiedProperties` — confirm `AppRole.Value` display name in your tenant's events
 - [ ] `AuditLogs.InitiatedBy.user.userPrincipalName` — confirm populated for human-initiated grants; may be empty for service-principal-initiated grants

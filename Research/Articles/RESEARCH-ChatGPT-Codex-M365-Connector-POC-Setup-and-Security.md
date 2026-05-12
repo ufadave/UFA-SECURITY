@@ -6,8 +6,7 @@ author: "OpenAI Help Center / CyberDom / Microsoft TechCommunity"
 detection_candidate: true
 tags:
   - "#resource"
-  - "#status/active"
-  - "#action-required"
+  - "#status/done"
   - "#identity"
   - "#cloud"
   - "#email"
