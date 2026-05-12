@@ -64,7 +64,7 @@ tags:
 ## Queries
 
 ### Query 1 — Establish Full Sign-in Timeline (Run First)
-
+- Saved 
 ```kql
 // Table: SigninLogs
 
