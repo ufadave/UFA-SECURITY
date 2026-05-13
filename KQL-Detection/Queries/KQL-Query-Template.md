@@ -1,6 +1,6 @@
 ---
-date: <% tp.date.now("YYYY-MM-DD") %>
-title: <% tp.file.title.replace("KQL-", "").replaceAll("-", " ") %>
+date: 2026-05-12
+title: Query Template
 type: detection
 table: ""
 schema: ""
@@ -17,13 +17,13 @@ tags:
   - "#status/draft"
 ---
 
-# KQL — <% tp.file.title.replace("KQL-", "").replaceAll("-", " ") %>
+# KQL — Query Template
 
 ---
 
-**Table:** | **Schema:** <% await tp.system.suggester(["Advanced Hunting", "Sentinel / Log Analytics"], ["Advanced Hunting", "Sentinel / Log Analytics"], false, "Select schema") %>
+**Table:** | **Schema:** null
 **MITRE ATT&CK:** | **Tactic:** | **Technique:**
-**Created:** <% tp.date.now("YYYY-MM-DD") %> | **Status:** `Draft`
+**Created:** 2026-05-13 | **Status:** `Draft`
 
 ---
 
@@ -57,7 +57,7 @@ tags:
 
 ### MDE Custom Detection Rule
 <!-- Default for all device-based detections — DeviceProcessEvents, DeviceNetworkEvents, DeviceFileEvents, DeviceLogonEvents, DeviceEvents, DeviceRegistryEvents, etc. -->
-- **Rule Name:** <% tp.file.title.replace("KQL-", "").replaceAll("-", " ") %>
+- **Rule Name:** Query Template
 - **Frequency:**
 - **Lookback:**
 - **Severity:**
@@ -67,7 +67,7 @@ tags:
 
 ### Sentinel Analytics Rule
 <!-- Use only for Log Analytics sources — SigninLogs, AuditLogs, CloudAppEvents, EmailEvents, OfficeActivity, SecurityEvent (if ingested) -->
-- **Rule Name:** <% tp.file.title.replace("KQL-", "").replaceAll("-", " ") %>
+- **Rule Name:** Query Template
 - **Frequency:**
 - **Lookback:**
 - **Severity:**
@@ -78,7 +78,7 @@ tags:
 
 ## Promote to Rule
 
-> When validated and ready to deploy, run `promote detection <% tp.file.title %>`.
+> When validated and ready to deploy, run `promote detection KQL-Query-Template`.
 > This will rename the note to `RULE-` prefix and move it to `Detection-KQL/Rules/`.
 
 - [ ] Query validated against live environment
@@ -101,4 +101,4 @@ tags:
 ## Changelog
 | Date | Change |
 |------|--------|
-| <% tp.date.now("YYYY-MM-DD") %> | Created |
+| 2026-05-13 | Created |

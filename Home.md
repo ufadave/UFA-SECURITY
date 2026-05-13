@@ -72,6 +72,17 @@ SORT file.mtime DESC
 
 ---
 
+## 🎫 Open Tickets
+```dataview
+TABLE snow_id AS "INC #", affected_user AS "User", affected_asset AS "Asset", status AS "Status", file.mtime AS "Updated"
+FROM #ticket
+WHERE status != "Closed"
+AND !contains(file.path, "_Templates")
+SORT file.mtime DESC
+```
+
+---
+
 ## 🏗️ Active Projects
 ```dataview
 TABLE status AS "Status", file.mtime AS "Last Updated"
@@ -247,8 +258,10 @@ LIMIT 2
 ## 🗺️ Map of Content
 
 ### [[KQL-Detection/|Detection & KQL]]
-> All KQL content lives in this flat folder. Slice by content-type tag:
-> `#detection/query`, `#detection/mde-rule`, `#detection/analytics-rule`, `#detection/hunting`, `#detection/audit`
+- [[KQL-Detection/Rules/|Rules]] — promoted analytics rules and MDE custom detections
+- [[KQL-Detection/Hunting/|Hunting]] — proactive hunting queries
+- [[KQL-Detection/IR/|IR]] — reactive IR queries
+> Draft `KQL-` notes live flat in `KQL-Detection/` until promoted.
 
 ### [[Hardening/|Hardening]]
 - [[Hardening/Controls/|Controls]]
@@ -275,6 +288,7 @@ LIMIT 2
 - [[OT-SCADA/Vulnerabilities/|Vulnerabilities]]
 - [[OT-SCADA/Compliance/|Compliance]]
 
+### [[Tickets/|Tickets]]
 ### [[Projects/|Projects]]
 ### [[Research/|Research]]
 ### [[Meetings/|Meetings]]
