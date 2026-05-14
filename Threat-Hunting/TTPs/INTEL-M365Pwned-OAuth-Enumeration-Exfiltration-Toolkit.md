@@ -83,7 +83,7 @@ AuditLogs
 
 **Sentinel / SigninLogs — Application sign-in anomaly (non-interactive)**
 ```kql
-SigninLogs
+AADNonInteractiveUserSignInLogs
 | where IsInteractive == false
 | where AppId !in (known_good_app_ids) // maintain allowlist
 | where ResultType == 0
