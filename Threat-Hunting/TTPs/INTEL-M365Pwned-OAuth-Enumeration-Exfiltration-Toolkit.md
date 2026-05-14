@@ -67,7 +67,7 @@ CloudAppEvents
 | where ActionType == "MailItemsAccessed"
 | where ApplicationId != "" // app-only — no delegated user
 | summarize MailboxCount = dcount(AccountObjectId), AccessCount = count() 
-    by ApplicationId, ApplicationDisplayName, bin(Timestamp, 1h)
+    by ApplicationId, Application, bin(Timestamp, 1h)
 | where MailboxCount > 10
 | order by MailboxCount desc
 ```
