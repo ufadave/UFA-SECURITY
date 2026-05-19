@@ -11,6 +11,7 @@ tags:
   - "#cloud"
   - "#email"
   - "#action-required"
+  - "#AI"
 ---
 
 # RESEARCH — AI Coding Tools and M365 Integration: Security Summary
@@ -99,22 +100,22 @@ Codex is approved for developer use and Cisco Umbrella blocks unsanctioned gener
 
 ## Open Items
 
-| # | Item | Priority | Owner |
-|---|------|----------|-------|
-| 1 | Confirm OpenAI account tier in writing — Enterprise vs Business/Team | High | Dev team owner |
-| 2 | Lock down user OAuth self-consent in Entra ID — enable admin consent workflow | High | Security Operations |
-| 3 | Confirm Mail.ReadWrite write actions disabled in OpenAI workspace settings | High | Dev team owner |
-| 4 | Restrict ChatGPT service principal to POC group only (Assignment required = Yes) | High | Security Operations |
-| 5 | Deploy Query 1 and Query 2 from KQL note as Sentinel analytics rules | High | Security Operations |
-| 6 | Populate POC user watchlist and deploy Query 3 as High severity rule | Medium | Security Operations |
-| 7 | Configure MCAS session policy for ChatGPT app — close CloudAppEvents gap | Medium | Security Operations |
-| 8 | Build KQL for MailItemsAccessed — detect Graph API draft creation | Medium | Security Operations |
-| 9 | Set formal POC end date with scheduled token revocation | Medium | Leadership / dev team |
-| 10 | Attach written use conditions to the Codex approval — prohibit secrets and production code | Medium | Security Operations / management |
-| 11 | Pull Umbrella logs for OpenAI API domains — baseline volume per device | Low | Security Operations |
-| 12 | Audit whether OT/SCADA documentation resides in M365 before any AI tool deployment | High | Security Operations |
-| 13 | SharePoint access review — prerequisite for any AI assistant deployment | High | Security Operations |
-| 14 | Leadership decision: pivot POC to M365 Copilot? | High | Leadership |
+| #   | Item                                                                                       | Priority | Owner                            |
+| --- | ------------------------------------------------------------------------------------------ | -------- | -------------------------------- |
+| 1   | Confirm OpenAI account tier in writing — Enterprise vs Business/Team                       | High     | Dev team owner                   |
+| 2   | Lock down user OAuth self-consent in Entra ID — enable admin consent workflow              | High     | Security Operations              |
+| 3   | Confirm Mail.ReadWrite write actions disabled in OpenAI workspace settings                 | High     | Dev team owner                   |
+| 4   | Restrict ChatGPT service principal to POC group only (Assignment required = Yes)           | High     | Security Operations              |
+| 5   | Deploy Query 1 and Query 2 from KQL note as Sentinel analytics rules                       | High     | Security Operations              |
+| 6   | Populate POC user watchlist and deploy Query 3 as High severity rule                       | Medium   | Security Operations              |
+| 7   | Configure MCAS session policy for ChatGPT app — close CloudAppEvents gap                   | Medium   | Security Operations              |
+| 8   | Build KQL for MailItemsAccessed — detect Graph API draft creation                          | Medium   | Security Operations              |
+| 9   | Set formal POC end date with scheduled token revocation                                    | Medium   | Leadership / dev team            |
+| 10  | Attach written use conditions to the Codex approval — prohibit secrets and production code | Medium   | Security Operations / management |
+| 11  | Pull Umbrella logs for OpenAI API domains — baseline volume per device                     | Low      | Security Operations              |
+| 12  | Audit whether OT/SCADA documentation resides in M365 before any AI tool deployment         | High     | Security Operations              |
+| 13  | SharePoint access review — prerequisite for any AI assistant deployment                    | High     | Security Operations              |
+| 14  | Leadership decision: pivot POC to M365 Copilot?                                            | High     | Leadership                       |
 
 ---
 
