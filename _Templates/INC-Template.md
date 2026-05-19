@@ -1,8 +1,8 @@
 ---
-date: <% tp.date.now("YYYY-MM-DD") %>
-title: <% tp.file.title %>
+date: 2026-05-19
+title: IRQUERY-Template
 type: ticket
-snow_id: <% tp.file.title %>
+snow_id: IRQUERY-Template
 category: ""
 status: "Open"
 priority: ""
@@ -15,9 +15,9 @@ tags:
   - "#status/active"
 ---
 
-# <% tp.file.title %>
+# IRQUERY-Template
 
-**Opened:** <% tp.date.now("YYYY-MM-DD") %> | **Status:** `Open` | **Priority:** 
+**Opened:** 2026-05-19 | **Status:** `Open` | **Priority:** 
 **Category:** <!--- Security Alert | User Request | System Issue | Other --->
 
 ---
@@ -43,7 +43,7 @@ tags:
 
 > Steps taken, pivots, observations. Date-stamp each session.
 
-### <% tp.date.now("YYYY-MM-DD") %>
+### 2026-05-19
 
 
 ---
@@ -84,4 +84,4 @@ tags:
 ## Changelog
 | Date | Change |
 |------|--------|
-| <% tp.date.now("YYYY-MM-DD") %> | Created |
+| 2026-05-19 | Created |

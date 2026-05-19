@@ -13,11 +13,11 @@ mitre:
 detection_candidate: true
 tags:
   - "#intel"
-  - "#status/draft"
+  - "#status/done"
   - "#endpoint"
   - "#identity"
   - "#email"
-  - "#action-required"
+ 
 ---
 
 # INTEL-KongTuke-Teams-ModeloRAT-Campaign
@@ -65,7 +65,7 @@ Direct relevance. Your environment uses Microsoft Teams with M365/E5, and Teams 
 
 ## Detection Notes
 
-> `detection_candidate: true`
+> `detection_candidate: false queries were all too noisy. I did discover a user with Python installed in her AppData folder that we should get her to move. 
 
 ### KQL Stubs
 
@@ -124,17 +124,17 @@ DeviceRegistryEvents
 ```
 
 ### Validated Columns
-- [ ] `FolderPath` — DeviceProcessEvents, confirm column exists (vs `ProcessFolderPath`)
-- [ ] `RemoteIPType` — DeviceNetworkEvents, available in MDE Advanced Hunting
-- [ ] `RegistryValueData` — DeviceRegistryEvents, confirm column name in your schema
+- [x] `FolderPath` — DeviceProcessEvents, confirm column exists (vs `ProcessFolderPath`)
+- [x] `RemoteIPType` — DeviceNetworkEvents, available in MDE Advanced Hunting
+- [x] `RegistryValueData` — DeviceRegistryEvents, confirm column name in your schema
 
 ---
 
 ## Hardening Actions
 
-- [ ] **PRIORITY** — Audit Microsoft Teams Admin Center → External Access. Restrict external federation to an approved allowlist. Block open federation from unknown tenants.
+- [x] **PRIORITY** — Audit Microsoft Teams Admin Center → External Access. Restrict external federation to an approved allowlist. Block open federation from unknown tenants.
 - [ ] Block or alert on Dropbox downloads from corporate endpoints via MCAS session policy or Intune compliance rule
-- [ ] Educate users via comms: IT helpdesk will never send technical instructions via Teams chat. Any request to paste a PowerShell command should be treated as a social engineering attempt.
+- [x] Educate users via comms: IT helpdesk will never send technical instructions via Teams chat. Any request to paste a PowerShell command should be treated as a social engineering attempt.
 - [ ] Hunt for `WPy64-*` directories under `%APPDATA%\Roaming\` across endpoint estate using MDE Advanced Hunting
 
 ---

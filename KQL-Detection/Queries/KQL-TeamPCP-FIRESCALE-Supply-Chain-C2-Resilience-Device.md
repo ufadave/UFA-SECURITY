@@ -6,13 +6,13 @@ schema: "Advanced Hunting"
 mitre: "T1552.001, T1567.001, T1083"
 tactic: "Credential Access, Exfiltration, Discovery"
 technique: "Credentials in Files, Exfiltration to GitHub, File and Directory Discovery"
-status: "Draft"
+status: "Done"
 promoted_to_rule: false
-mde_rule_name: ""
-sentinel_rule_id: ""
+mde_rule_name: "Custom -  Python Harvesting Credentials Detected"
+
 tags:
   - "#detection"
-  - "#status/draft"
+  - "#status/done"
   - "#endpoint"
   - "#cloud"
   - "#supply-chain"
@@ -66,10 +66,10 @@ DeviceNetworkEvents
 ---
 
 ## Validated Columns
-- [ ] `ProcessCommandLine` — DeviceProcessEvents
-- [ ] `FolderPath` — DeviceProcessEvents (vs `ProcessFolderPath`)
-- [ ] `RemoteUrl` — DeviceNetworkEvents
-- [ ] `RemoteIPType` — DeviceNetworkEvents
+- [x] `ProcessCommandLine` — DeviceProcessEvents
+- [x] `FolderPath` — DeviceProcessEvents (vs `ProcessFolderPath`)
+- [x] `RemoteUrl` — DeviceNetworkEvents
+- [x] `RemoteIPType` — DeviceNetworkEvents
 
 ---
 
@@ -82,12 +82,12 @@ DeviceNetworkEvents
 ## Deployment
 
 ### MDE Custom Detection Rule
-- **Rule Name:** TeamPCP FIRESCALE Supply Chain C2 Resilience Device
-- **Frequency:** Every 1h
+- **Rule Name:** Custom -  Python Harvesting Credentials Detected
+- **Frequency:** NRT
 - **Lookback:** 1h
-- **Severity:** High
+- **Severity:** <Medium>
 - **Actions:** `Alert only`
-- **Deployed:** [ ]
+- **Deployed:** [ Yes]
 - **Rule ID:** <!-- Populate mde_rule_name in frontmatter when deployed -->
 
 <!-- INACTIVE: Sentinel Analytics Rule — Advanced Hunting schema; deploy as MDE Custom Detection -->

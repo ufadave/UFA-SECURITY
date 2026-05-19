@@ -6,13 +6,13 @@ schema: "Advanced Hunting"
 mitre: "T1059.001, T1105, T1547.001, T1053.005"
 tactic: "Execution, Persistence, Command and Control"
 technique: "PowerShell, Ingress Tool Transfer, Registry Run Keys, Scheduled Task"
-status: "Draft"
+status: "done"
 promoted_to_rule: false
 mde_rule_name: ""
 sentinel_rule_id: ""
 tags:
   - "#detection"
-  - "#status/draft"
+  - "#status/done"
   - "#endpoint"
   - "#ransomware"
 ---
@@ -47,7 +47,7 @@ DeviceProcessEvents
 | project Timestamp, DeviceName, AccountName, FolderPath, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine
 | order by Timestamp desc
 ```
-
+Query is way too noisy due to Geeta Kilari having Python installed in appdata. 
 ## Query — 2: ModeloRAT C2 Beaconing
 
 ```kql
@@ -63,7 +63,7 @@ DeviceNetworkEvents
 | project Timestamp, DeviceName, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFolderPath, InitiatingProcessCommandLine
 | order by Timestamp desc
 ```
-
+quieter than query 1. Zero rows returned. 
 ## Query — 3: ZIP Staging Under AppData
 
 ```kql
@@ -79,7 +79,7 @@ DeviceFileEvents
 | project Timestamp, DeviceName, AccountName, FolderPath, FileName, InitiatingProcessFileName, InitiatingProcessCommandLine
 | order by Timestamp desc
 ```
-
+Too noisy as _PSScriptPolicyTest_ files are run from appdata.. 
 ## Query — 4: Run Key Persistence
 
 ```kql
@@ -96,13 +96,13 @@ DeviceRegistryEvents
 ```
 
 ---
-
+Query 4 is also too  noisy. Not a valid candidate for a detection. 
 ## Validated Columns
-- [ ] `FolderPath` — DeviceProcessEvents (confirm vs `ProcessFolderPath`)
-- [ ] `InitiatingProcessFolderPath` — DeviceNetworkEvents
-- [ ] `RemoteIPType` — DeviceNetworkEvents, confirm available
-- [ ] `RegistryValueData` — DeviceRegistryEvents, confirm exact column name
-- [ ] `ActionType` values in DeviceFileEvents — verify "FileCreated" vs schema
+- [x] `FolderPath` — DeviceProcessEvents (confirm vs `ProcessFolderPath`)
+- [x] `InitiatingProcessFolderPath` — DeviceNetworkEvents
+- [x] `RemoteIPType` — DeviceNetworkEvents, confirm available
+- [x] `RegistryValueData` — DeviceRegistryEvents, confirm exact column name
+- [x] `ActionType` values in DeviceFileEvents — verify "FileCreated" vs schema
 
 ---
 
