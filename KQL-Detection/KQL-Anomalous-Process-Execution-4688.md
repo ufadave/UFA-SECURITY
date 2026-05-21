@@ -13,10 +13,10 @@ tags:
   - "#detection/query"
   - "#detection"
   - "#endpoint"
-  - status: promoted
+  - status: done
   - promoted_to_rule: true
-  - "#status/deployed"
-status: deployed
+  - "#status/done"
+status: done
 ---
 
 # Anomalous Process Execution — 4688 Time-Series Anomaly Detection

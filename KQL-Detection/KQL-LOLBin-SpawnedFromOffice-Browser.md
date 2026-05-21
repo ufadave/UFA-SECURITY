@@ -1,5 +1,5 @@
 ---
-title: "LOLBin Spawned from Office or Browser with Suspicious Command Line"
+title: LOLBin Spawned from Office or Browser with Suspicious Command Line
 date: 2026-04-26
 schema: Advanced Hunting (MDE)
 table: DeviceProcessEvents
@@ -13,8 +13,8 @@ tags:
   - "#detection/hunting"
   - "#endpoint"
   - "#hunt"
-  - "#status/active"
-status: active
+  - "#status/review"
+status: review
 ---
 
 # LOLBin Spawned from Office or Browser with Suspicious Command Line

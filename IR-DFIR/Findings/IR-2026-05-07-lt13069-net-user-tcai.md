@@ -1,17 +1,16 @@
 ---
-title: "IR-2026-05-07-lt13069-net-user-tcai"
+title: IR-2026-05-07-lt13069-net-user-tcai
 date: 2026-05-07
 case_id: IR-2026-05-07-lt13069-01
-alert_id: 
+alert_id:
 severity: Medium
-status: open
+status: done
 tags:
   - "#ir"
   - "#finding"
   - "#endpoint"
   - "#identity"
-  - "#action-required"
-  - "#status/active"
+  - "#status/done"
 ---
 
 # IR-2026-05-07-lt13069-net-user-tcai

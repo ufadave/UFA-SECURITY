@@ -6,13 +6,13 @@ schema: "Sentinel / Log Analytics"
 mitre: "T1114.003, T1137.005, T1078.004"
 tactic: "Collection, Persistence, Defence Evasion"
 technique: "Email Forwarding Rule, Office Application Startup: Outlook Rules, Valid Accounts: Cloud Accounts"
-status: "deployed"
+status: "done"
 promoted_to_rule: true
 sentinel_rule_id: "467e3a19-0fff-443a-8c46-dd06a8b23ddd"
 tags:
   - "#detection"
   - "#detection/analytics-rule"
-  - "#status/active"
+  - "#status/done"
   - "#identity"
   - "#email"
   - "#cloud"
@@ -24,7 +24,7 @@ tags:
 
 **Table:** `OfficeActivity` | **Schema:** Sentinel / Log Analytics
 **MITRE ATT&CK:** T1114.003, T1137.005, T1078.004 | **Tactic:** Collection, Persistence, Defence Evasion | **Technique:** Email Forwarding Rule, Outlook Rules, Valid Accounts: Cloud Accounts
-**Created:** 2026-05-05 | **Status:** `Draft`
+**Created:** 2026-05-05 | **Status:** `done`
 
 ---
 
