@@ -9,7 +9,7 @@ tactic: ""
 technique: ""
 status: "Draft"
 promoted_to_rule: false
-mde_rule_id: ""
+mde_rule_name: ""
 sentinel_rule_id: ""
 tags:
   - "#detection"

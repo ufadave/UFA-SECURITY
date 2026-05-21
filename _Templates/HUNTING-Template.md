@@ -1,6 +1,6 @@
 ---
-date: <% tp.date.now("YYYY-MM-DD") %>
-title: <% tp.file.title.replace("HUNTING-", "").replaceAll("-", " ") %>
+date: 2026-05-19
+title: IRQUERY Template
 type: hunting
 table: ""
 schema: ""
@@ -17,13 +17,13 @@ tags:
   - "#status/draft"
 ---
 
-# KQL Hunting — <% tp.file.title.replace("HUNTING-", "").replaceAll("-", " ") %>
+# KQL Hunting — IRQUERY Template
 
 ---
 
-**Table:** | **Schema:** <% await tp.system.suggester(["Advanced Hunting", "Sentinel / Log Analytics"], ["Advanced Hunting", "Sentinel / Log Analytics"], false, "Select schema") %>
+**Table:** | **Schema:** null
 **MITRE ATT&CK:** | **Tactic:** | **Technique:**
-**Created:** <% tp.date.now("YYYY-MM-DD") %> | **Status:** `Draft`
+**Created:** 2026-05-20 | **Status:** `Draft`
 
 ---
 
@@ -72,7 +72,7 @@ tags:
 
 ## Promote to Detection?
 
-> If this query has consistent signal worth automating, run `promote detection <% tp.file.title %>`.
+> If this query has consistent signal worth automating, run `promote detection IRQUERY-Template`.
 > This will create a new `KQL-` draft note with the deployment section pre-populated.
 
 - [ ] Yes — signal is consistent and worth automating
@@ -94,4 +94,4 @@ tags:
 ## Changelog
 | Date | Change |
 |------|--------|
-| <% tp.date.now("YYYY-MM-DD") %> | Created |
+| 2026-05-20 | Created |

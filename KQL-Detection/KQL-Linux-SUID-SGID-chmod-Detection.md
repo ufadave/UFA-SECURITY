@@ -6,16 +6,15 @@ schema: Advanced Hunting
 mitre: T1548.001
 tactic: Privilege Escalation
 technique: Setuid and Setgid
-status: Deployed
+status: Active
 promoted_to_rule: true
-mde_rule_id: "Custom - Linux SUID SGID chmod Detection"
-sentinel_rule_id: ""
+mde_rule_name: Custom - Linux SUID SGID chmod Detection
 tags:
   - "#detection"
   - "#detection/MDE"
-  - "#status/Deployed"
   - "#endpoint"
   - "#ot-scada"
+  - "#status/active"
 ---
 
 # KQL —Custom - Linux SUID SGID chmod Detection
@@ -120,8 +119,7 @@ Post-exclusion result: **0 residual events** in 30 days across estate. Ready for
 - **Lookback:** 1 day
 - **Severity:** High
 - **Actions:** Alert only -- do not auto-isolate; OT plant hosts require manual containment decision per playbook
-- **Deployed:** [ ]
-- **Rule ID:** <!-- Populate mde_rule_id in frontmatter when deployed -->
+- **Deployed:** [Y]
 
 
 ## Hardening Control Pair
