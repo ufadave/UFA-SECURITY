@@ -1,5 +1,5 @@
 ---
-title: "WalkMe — Security Risk Assessment"
+title: WalkMe — Security Risk Assessment
 date: 2026-05-14
 vendor: WalkMe (SAP)
 product: WalkMe Digital Adoption Platform + Browser Extension
@@ -9,10 +9,9 @@ decision_date:
 tags:
   - "#resource"
   - "#vendor"
-  - "#status/draft"
   - "#endpoint"
   - "#cloud"
-  - "#action-required"
+  - "#status/done"
 ---
 
 # WalkMe — Security Risk Assessment

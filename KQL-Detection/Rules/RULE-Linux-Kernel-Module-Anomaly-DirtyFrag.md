@@ -1,20 +1,20 @@
 ---
 date: 2026-05-13
 title: Linux Kernel Module Anomaly DirtyFrag
-table: "DeviceProcessEvents, DeviceInfo"
-schema: "Advanced Hunting"
+table: DeviceProcessEvents, DeviceInfo
+schema: Advanced Hunting
 type: detection
-mitre: "T1215"
-tactic: "Persistence"
-technique: "Kernel Modules and Extensions"
-status: "Deployed"
+mitre: T1215
+tactic: Persistence
+technique: Kernel Modules and Extensions
+status: Done
 promoted_to_rule: true
-mde_rule_name: "Custom - Linux Kernel Module Anomaly DirtyFrag"
+mde_rule_name: Custom - Linux Kernel Module Anomaly DirtyFrag
 tags:
   - "#detection"
   - "#detection/analytics-rule"
-  - "#status/active"
   - "#endpoint"
+  - "#status/done"
 ---
 
 # RULE — Linux Kernel Module Anomaly DirtyFrag
@@ -23,7 +23,7 @@ tags:
 
 **Table:** DeviceProcessEvents (joined with DeviceInfo) | **Schema:** Advanced Hunting
 **MITRE ATT&CK:** T1215 | **Tactic:** Persistence | **Technique:** Kernel Modules and Extensions
-**Created:** 2026-05-13 | **Status:** `Deployed`
+	**Created:** 2026-05-13 | **Status:** `Done
 
 ---
 
@@ -55,16 +55,16 @@ DeviceProcessEvents
 ---
 
 ## Validated Columns
-- [ ] `FileName` — confirm `modprobe`, `insmod`, `rmmod` are captured as process names on Linux MDE agents
-- [ ] `ProcessCommandLine` — confirm module name arguments are populated for kernel tool invocations on Linux agents
-- [ ] `OSPlatform` — in `DeviceInfo`, not `DeviceProcessEvents`; join via `let LinuxDevices` (implemented)
+- [x] `FileName` — confirm `modprobe`, `insmod`, `rmmod` are captured as process names on Linux MDE agents
+- [x] `ProcessCommandLine` — confirm module name arguments are populated for kernel tool invocations on Linux agents
+- [x] `OSPlatform` — in `DeviceInfo`, not `DeviceProcessEvents`; join via `let LinuxDevices` (implemented)
 
 ---
 
 ## Test Results
 
-- [ ] Ran against 30-day lookback — zero results (expected; no module manipulation baseline)
-- [ ] Confirmed `let LinuxDevices` join returns expected Linux hosts
+- [x] Ran against 30-day lookback — zero results (expected; no module manipulation baseline)
+- [x] Confirmed `let LinuxDevices` join returns expected Linux hosts
 - [ ] Validated module name strings fire on: `esp4`, `esp6`, `rxrpc`, `xfrm`
 
 ---

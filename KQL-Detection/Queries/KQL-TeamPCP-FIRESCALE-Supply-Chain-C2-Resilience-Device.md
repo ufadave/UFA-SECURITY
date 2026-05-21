@@ -1,15 +1,14 @@
 ---
 date: 2026-05-18
 title: TeamPCP FIRESCALE Supply Chain C2 Resilience Device
-table: "DeviceProcessEvents, DeviceNetworkEvents"
-schema: "Advanced Hunting"
-mitre: "T1552.001, T1567.001, T1083"
-tactic: "Credential Access, Exfiltration, Discovery"
-technique: "Credentials in Files, Exfiltration to GitHub, File and Directory Discovery"
-status: "Done"
-promoted_to_rule: false
-mde_rule_name: "Custom -  Python Harvesting Credentials Detected"
-
+table: DeviceProcessEvents, DeviceNetworkEvents
+schema: Advanced Hunting
+mitre: T1552.001, T1567.001, T1083
+tactic: Credential Access, Exfiltration, Discovery
+technique: Credentials in Files, Exfiltration to GitHub, File and Directory Discovery
+status: Done
+promoted_to_rule: true
+mde_rule_name: Custom -  Python Harvesting Credentials Detected
 tags:
   - "#detection"
   - "#status/done"

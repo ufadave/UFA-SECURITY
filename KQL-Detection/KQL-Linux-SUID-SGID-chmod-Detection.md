@@ -6,15 +6,16 @@ schema: Advanced Hunting
 mitre: T1548.001
 tactic: Privilege Escalation
 technique: Setuid and Setgid
-status: Active
+status: done
 promoted_to_rule: true
-mde_rule_name: Custom - Linux SUID SGID chmod Detection
+mde_rule_id: Custom - Linux SUID SGID chmod Detection
+sentinel_rule_id: ""
 tags:
   - "#detection"
   - "#detection/MDE"
   - "#endpoint"
   - "#ot-scada"
-  - "#status/active"
+  - "#status/done"
 ---
 
 # KQL —Custom - Linux SUID SGID chmod Detection
@@ -23,7 +24,7 @@ tags:
 
 **Table:** DeviceProcessEvents + DeviceInfo | **Schema:** Advanced Hunting (MDE)
 **MITRE ATT&CK:** T1548.001 | **Tactic:** Privilege Escalation | **Technique:** Setuid and Setgid
-	**Created:** 2026-05-11 | **Status:** Deployed
+	**Created:** 2026-05-11 | **Status:** Done
 
 ---
 
