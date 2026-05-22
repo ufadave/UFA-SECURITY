@@ -23,7 +23,7 @@ tags:
 
 **Table:** DeviceProcessEvents, DeviceNetworkEvents | **Schema:** Advanced Hunting
 **MITRE ATT&CK:** T1552.001, T1567.001, T1083 | **Tactic:** Credential Access, Exfiltration, Discovery
-**Created:** 2026-05-18 | **Status:** `Draft`
+**Created:** 2026-05-18 | **Status:** Done
 
 ---
 
@@ -87,7 +87,7 @@ DeviceNetworkEvents
 - **Severity:** <Medium>
 - **Actions:** `Alert only`
 - **Deployed:** [ Yes]
-- **Rule ID:** <!-- Populate mde_rule_name in frontmatter when deployed -->
+- **Rule Name:** Custom -  Python Harvesting Credentials Detected
 
 <!-- INACTIVE: Sentinel Analytics Rule — Advanced Hunting schema; deploy as MDE Custom Detection -->
 

@@ -13,7 +13,7 @@ sentinel_rule_id: "6df40404-f6b6-4185-937f-01d5788a978f"
 tags:
   - "#detection"
   - "#detection/analytics-rule"
-  - "#status/Active"
+  - "#status/Done"
   - "#identity"
   - "#cloud"
 ---

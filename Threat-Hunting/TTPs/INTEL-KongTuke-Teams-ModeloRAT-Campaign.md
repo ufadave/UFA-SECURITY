@@ -143,6 +143,7 @@ DeviceRegistryEvents
 
 - [[]]
 - [[KQL-KongTuke-Teams-ModeloRAT-Campaign-Device]]
+- When I ran the first query it revealed that Geeta has Python installed in her Appdata folder. I called and asked her to move it to C:\Program Files\. She said she'll try to do that today. (May 21,2025)
 
 ---
 

@@ -1,13 +1,12 @@
 ---
 title: INFO-AADGraphActivityLogs-Entra-Recon-Detection
 date: 2026-05-12
-source: "https://cloudbrothers.info/en/aadgraphactivitylogs/"
+source: https://cloudbrothers.info/en/aadgraphactivitylogs/
 tags:
   - "#resource"
-  - "#status/draft"
-  - "#action-required"
   - "#identity"
   - "#cloud"
+  - "#status/done"
 ---
 
 # INFO — AADGraphActivityLogs: Entra Recon Detection (Cloudbrothers)
@@ -41,7 +40,7 @@ High -- directly actionable. The Azure AD Graph API is one of the most abused re
 
 ## Actions
 
-- [ ] **Enable AADGraphActivityLogs** in Entra ID Diagnostic Settings -- forward to Sentinel Log Analytics workspace. Navigate: Entra admin center > Monitoring > Diagnostic settings > Add diagnostic setting > check AADGraphActivityLogs > send to Log Analytics workspace
+- [x] **Enable AADGraphActivityLogs** in Entra ID Diagnostic Settings -- forward to Sentinel Log Analytics workspace. Navigate: Entra admin center > Monitoring > Diagnostic settings > Add diagnostic setting > check AADGraphActivityLogs > send to Log Analytics workspace
 - [ ] **Build hunting query** for ROADtools/AADInternals UserAgent patterns once log is flowing -- reference Bader's queries as a starting point
 - [ ] **Validate** `TimeRequested` vs `TimeGenerated` lag in your tenant before building scheduled analytics rules on this table
 
@@ -49,6 +48,7 @@ High -- directly actionable. The Azure AD Graph API is one of the most abused re
 
 ## Changelog
 
-| Date | Change |
-|------|--------|
+| Date       | Change                                                                    |
+| ---------- | ------------------------------------------------------------------------- |
 | 2026-05-12 | Created -- GA release of AADGraphActivityLogs, immediate action to enable |
+| 2026-05-21 | AADGraphActivityLogs enabled in Diagnostic Settings — action complete     |

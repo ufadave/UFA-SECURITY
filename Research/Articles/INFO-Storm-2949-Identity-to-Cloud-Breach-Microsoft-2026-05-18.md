@@ -64,9 +64,9 @@ From the Microsoft blog -- KQL opportunities for your environment:
 
 ## Actions
 
-- [ ] **Review SSPR configuration** -- restrict SSPR completion to trusted locations or require phishing-resistant MFA (FIDO2/certificate-based) for the authentication method used to complete the reset
+- [x] **Review SSPR configuration** -- restrict SSPR completion to trusted locations or require phishing-resistant MFA (FIDO2/certificate-based) for the authentication method used to complete the reset
 - [ ] **Audit Key Vault RBAC** -- identify any user accounts (not service principals) holding Owner or Contributor roles on Key Vault resources; scope to managed identities or dedicated service principals
-- [ ] **Enable AADGraphActivityLogs** -- would have captured the Graph API RBAC enumeration in phase 2; this is the third time this has come up as directly relevant (still not enabled)
+- [x] **Enable AADGraphActivityLogs** -- would have captured the Graph API RBAC enumeration in phase 2; this is the third time this has come up as directly relevant (still not enabled)
 - [ ] **Complete Entra app registration audit** -- Storm-2949 used service principal credentials harvested via Graph API; this is the attack surface that audit addresses
 
 ---

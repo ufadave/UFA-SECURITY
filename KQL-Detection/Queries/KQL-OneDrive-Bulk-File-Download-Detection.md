@@ -13,7 +13,7 @@ sentinel_rule_id: ""
 tags:
   - "#detection"
   - "#detection/analytics-rule"
-  - "#status/active"
+  - "#status/done"
   - "#cloud"
   - "#identity"
 ---
@@ -24,7 +24,7 @@ tags:
 
 **Table:** CloudAppEvents | **Schema:** Advanced Hunting (MDE)
 **MITRE ATT&CK:** T1567.002 | **Tactic:** Exfiltration | **Technique:** Exfiltration Over Web Service: Exfiltration to Cloud Storage
-**Created:** 2026-05-20 | **Status:** `Active`
+**Created:** 2026-05-20 | **Status:** Done
 
 ---
 
@@ -121,9 +121,8 @@ Post-threshold result: **1 result in 30 days** across estate. Noise floor accept
 - **Lookback:** 1h
 - **Severity:** High
 - **Actions:** Alert only
-- **Deployed:** [ ]
-- **Rule Name:** <!-- Populate mde_rule_name in frontmatter when deployed -->
-
+- **Deployed:** [Y ]
+- **Rule Name:** Custom - OneDrive Bulk File Download Detection
 ### Sentinel Analytics Rule
 - **Rule Name:** OneDrive Bulk File Download Detection
 - **Frequency:** Every 1h

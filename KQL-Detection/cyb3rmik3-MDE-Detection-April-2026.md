@@ -20,19 +20,22 @@ Direct relevance — cyb3rmik3 writes for exactly your stack (MDE Advanced Hunti
 
 ## Detection Notes
 > X content cannot be fetched directly. Visit the tweet URLs above to retrieve specific queries or detection logic. Add them here once reviewed.
-
----
+> [[KQL-Sign-In-From-Unregistered-Device]]
+>
 
 ## Actions
-- [ ] Review both tweet URLs for specific detection content
-- [ ] Extract any KQL queries and create dedicated query notes in [[Detection-KQL/Queries/]]
-- [ ] Follow cyb3rmik3 on X for ongoing detection content — high signal source
-- [ ] Cross-reference with Blu Raven Academy material from cyb3rmonk
+- [x] Review both tweet URLs for specific detection content
+- [x] Extract any KQL queries and create dedicated query notes in [[Detection-KQL/Queries/]]
+- [x] Follow cyb3rmik3 on X for ongoing detection content — high signal source
+- [x] Cross-reference with Blu Raven Academy material from cyb3rmonk
 
 ---
 
 ## Source Notes
 X/Twitter blocks direct content fetching. This note is a placeholder — visit the source URLs to retrieve the specific detection content and populate this note.
+[Introducing the Microsoft Sentinel Training Lab. Hands-On Security Operations in Minutes | Microsoft Community Hub](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/introducing-the-microsoft-sentinel-training-lab-hands-on-security-operations-in-/4513274)
+
+[Detection strategies across cloud and identities against infiltrating IT workers | Microsoft Security Blog](https://www.microsoft.com/en-us/security/blog/2026/04/21/detection-strategies-cloud-identities-against-infiltrating-it-workers/)
 
 ---
 

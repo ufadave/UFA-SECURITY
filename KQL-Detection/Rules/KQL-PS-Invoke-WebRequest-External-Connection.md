@@ -12,7 +12,7 @@ mde_rule_name: "Custom - PS connecting to an external site using Invoke-Webreque
 tags:
   - "#detection"
   - "#detection/analytics-rule"
-  - "#status/active"
+  - "#status/done"
   - "#endpoint"
   - "#network"
 ---
