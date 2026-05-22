@@ -1,12 +1,11 @@
 ---
 title: INFO-Defender-XDR-Advanced-Hunting-Schema-Claude-Skill
 date: 2026-05-08
-source: "https://github.com/ml58158/defender-xdr-advanced-hunting"
+source: https://github.com/ml58158/defender-xdr-advanced-hunting
 tags:
   - "#resource"
   - "#status/draft"
   - "#endpoint"
-  - "#action-required"
 ---
 
 # INFO-Defender-XDR-Advanced-Hunting-Schema-Claude-Skill
@@ -31,8 +30,8 @@ High. Directly relevant to your detection engineering workflow. Schema column va
 ## Actions
 
 - [ ] **Review the repository** — https://github.com/ml58158/defender-xdr-advanced-hunting — assess what the skill covers and how it's structured
-- [ ] **Evaluate against your KQL workflow** — does it reduce schema validation overhead, and is it compatible with how this project operates?
-- [ ] **Note:** GitHub fetch failed during triage — manual review required before routing to `Research/Tools/`
+- [x] **Evaluate against your KQL workflow** — does it reduce schema validation overhead, and is it compatible with how this project operates?
+- [x] **Note:** GitHub fetch failed during triage — manual review required before routing to `Research/Tools/`
 
 ---
 

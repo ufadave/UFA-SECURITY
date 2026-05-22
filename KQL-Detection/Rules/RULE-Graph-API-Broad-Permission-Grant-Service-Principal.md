@@ -9,7 +9,7 @@ technique: "T1528 Steal Application Access Token, T1098.003 Account Manipulation
 status: "Validated"
 promoted_to_rule: true
 mde_rule_name: ""
-sentinel_rule_id: ""
+sentinel_rule_id: "821133bb-b13c-439f-80fb-d2bae6c175ca"
 tags:
   - "#detection"
   - "#detection/analytics-rule"
@@ -30,12 +30,12 @@ tags:
 
 ## Promoted
 
-| Field | Detail |
-|-------|--------|
-| **Promoted** | 2026-05-21 |
-| **Deployed To** | Sentinel Analytics Rule |
-| **Rule Name** | Graph API Broad Permission Grant to Service Principal |
-| **Rule ID** | <!-- Populate sentinel_rule_id in frontmatter when deployed --> |
+| Field           | Detail                                                          |
+| --------------- | --------------------------------------------------------------- |
+| **Promoted**    | 2026-05-21                                                      |
+| **Deployed To** | Sentinel Analytics Rule                                         |
+| **Rule Name**   | Graph API Broad Permission Grant to Service Principal           |
+| **Rule ID**     | <!-- Populate sentinel_rule_id in frontmatter when deployed --> |
 
 ---
 
@@ -169,8 +169,8 @@ Noise floor acceptable for Count > 0 deployment.**
 - **MITRE Tactics:** Persistence, Privilege Escalation
 - **MITRE Techniques:** T1528, T1098.003
 - **Suppression:** None
-- **Deployed:** [ ]
-- **Rule GUID:** <!-- Populate sentinel_rule_id in frontmatter when deployed -->
+- **Deployed:** [ Y]
+- **Rule GUID:** 821133bb-b13c-439f-80fb-d2bae6c175ca
 
 ---
 
