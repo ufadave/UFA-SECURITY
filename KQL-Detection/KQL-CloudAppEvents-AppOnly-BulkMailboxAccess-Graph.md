@@ -17,8 +17,8 @@ tags:
   - "#detection/analytics-rule"
   - "#cloud"
   - "#identity"
-  - "#status/draft"
-  - "#action-required"
+  - "#status/done"
+
 ---
 
 # KQL — App-Only Bulk Mailbox Access via Microsoft Graph

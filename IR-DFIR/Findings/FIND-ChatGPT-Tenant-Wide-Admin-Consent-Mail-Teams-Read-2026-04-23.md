@@ -8,11 +8,11 @@ status: conditionally-approved
 tags:
   - "#ir"
   - "#finding"
-  - "#status/active"
+  - "#status/done"
   - "#cloud"
   - "#identity"
   - "#email"
-  - "#action-required"
+  
 ---
 
 # FIND — ChatGPT Tenant-Wide Admin Consent: Mail.Read + Teams Chat Access (2026-04-23)

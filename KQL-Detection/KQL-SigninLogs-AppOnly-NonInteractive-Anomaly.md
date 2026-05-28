@@ -18,7 +18,7 @@ tags:
   - "#cloud"
   - "#identity"
   - "#status/draft"
-  - "#action-required"
+
 ---
 
 # KQL — App-Only Non-Interactive Sign-In from Unknown Application
@@ -153,10 +153,10 @@ SigninLogs
 
 ## Validated Columns
 
-- [ ] `AADNonInteractiveUserSignInLogs` — confirm table exists and is populated in your Sentinel workspace (`AADNonInteractiveUserSignInLogs | take 1`)
-- [ ] `AADNonInteractiveUserSignInLogs.AppId` — confirm string GUID, matches Entra app registration Application (client) ID
+- [x] `AADNonInteractiveUserSignInLogs` — confirm table exists and is populated in your Sentinel workspace (`AADNonInteractiveUserSignInLogs | take 1`)
+- [x] `AADNonInteractiveUserSignInLogs.AppId` — confirm string GUID, matches Entra app registration Application (client) ID
 - [ ] `AADNonInteractiveUserSignInLogs.ResultType` — confirm `"0"` string (not integer `0`) represents success
-- [ ] `AADNonInteractiveUserSignInLogs.ServicePrincipalId` — confirm populated for app-only authentications
+- [x] `AADNonInteractiveUserSignInLogs.ServicePrincipalId` — confirm populated for app-only authentications
 - [ ] `AADNonInteractiveUserSignInLogs.ResourceDisplayName` — confirm values match the `has_any` list above in your environment
 - [ ] `SigninLogs.IsInteractive` — confirm `bool` type; `false` filters to non-interactive
 - [ ] `known_good_app_ids` — **must be populated before deployment** — see pre-deployment steps below
@@ -202,10 +202,10 @@ Review the output with your app catalogue. Everything on this list that is legit
 
 ## Test Results
 
-- [ ] `AADNonInteractiveUserSignInLogs` table confirmed populated
+- [x] `AADNonInteractiveUserSignInLogs` table confirmed populated
 - [ ] Pre-deployment 30d app enumeration query run
 - [ ] `known_good_app_ids` list populated and reviewed
-- [ ] `ResultType == "0"` confirmed as success string
+- [x] `ResultType == "0"` confirmed as success string
 - [ ] `ResourceDisplayName` values validated against your environment
 - [ ] False positive rate acceptable after allowlist populated
 - [ ] Deployed to Sentinel

@@ -138,9 +138,9 @@ AuditLogs
 - [x] `ApplicationId` — column exists in CloudAppEvents; note: is int type, use OAuthAppId for OAuth app identifier
 - [x] `ObjectName` — represents file path when ObjectType is File; represents email subject when ObjectType is Email
 - [x] `ActionType == "MailItemsAccessed"` — not generated for app-level Graph access; Email ObjectType ActionTypes are: MoveToDeletedItems, Create, SoftDelete, Update
-- [ ] `AuditLogs` — confirm M365 audit logs are flowing to Sentinel workspace
-- [ ] `AADNonInteractiveUserSignInLogs` — confirm table is populated in Sentinel workspace
-- [ ] `AuditLogs OperationName == "Add app role assignment to service principal"` — confirm operation name for permission grant events
+- [x] `AuditLogs` — confirm M365 audit logs are flowing to Sentinel workspace
+- [x] `AADNonInteractiveUserSignInLogs` — confirm table is populated in Sentinel workspace
+- [x] `AuditLogs OperationName == "Add app role assignment to service principal"` — confirm operation name for permission grant events
 
 ---
 
@@ -151,7 +151,7 @@ AuditLogs
 - [ ] **Alert on new admin-consented app permissions** — promote AuditLogs consent grant stub to Sentinel analytics rule
 - [ ] **Conditional Access for workload identities** — restrict service principals to known IP ranges where possible (Entra Workload Identity Premium required)
 - [ ] **Monitor for pass-the-token usage** — raw access token auth (grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer) is a detection signal
-- [ ] **Confirm M365 Unified Audit Log** is enabled and streaming to Sentinel — required for CloudAppEvents and AuditLogs coverage
+- [x] **Confirm M365 Unified Audit Log** is enabled and streaming to Sentinel — required for CloudAppEvents and AuditLogs coverage
 - [ ] **Review Defender for Cloud Apps policies** — enable anomaly detection for app-only large-scale data access
 
 ## Sentinel Analytics Rule Config
