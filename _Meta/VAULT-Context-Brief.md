@@ -8,7 +8,7 @@ tags:
 icon: LiBrainCircuit
 ---
 
-# Claude Context Brief
+# Vault Context Brief
 
 > Paste this note at the start of any Claude session outside the main project to restore full working context. Update the Dynamic Layer weekly or when priorities shift.
 
@@ -16,16 +16,16 @@ icon: LiBrainCircuit
 
 ## Environment
 
-| Field | Detail |
-|-------|--------|
-| **Stack** | MDE, Microsoft Sentinel, Entra ID, MDO, MCAS |
-| **Endpoints** | ~150+ across Alberta, BC, Saskatchewan — includes POS terminals |
-| **OT/SCADA** | Recently acquired fertilizer plant — Rockwell/Allen-Bradley PLCs, network segmentation unconfirmed |
-| **Identity** | Hybrid Entra ID + Active Directory (Entra Connect) |
-| **MDM** | Intune + Active Directory |
-| **Schema** | Advanced Hunting (MDE) and Log Analytics (Sentinel) — always specify which |
-| **Platform** | Mac (personal), Windows (work) — vault on OneDrive |
-| **Training** | Blu Raven Academy (cyb3rmonk) |
+| Field         | Detail                                                                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Stack**     | MDE, Microsoft Sentinel, Entra ID, MDO, MCAS                                                                                   |
+| **Endpoints** | ~150+ across Alberta, BC, Saskatchewan — includes POS terminals                                                                |
+| **OT/SCADA**  | Recently acquired fertilizer plant — Rockwell/Allen-Bradley PLCs, network segmentation confirmed.  Not that big of a deal yet. |
+| **Identity**  | Hybrid Entra ID + Active Directory (Entra Connect)                                                                             |
+| **MDM**       | Intune + Active Directory                                                                                                      |
+| **Schema**    | Advanced Hunting (MDE) and Log Analytics (Sentinel) — always specify which                                                     |
+| **Platform**  | Mac (personal), Windows (work) — vault on OneDrive                                                                             |
+| **Training**  | Blu Raven Academy (cyb3rmonk)                                                                                                  |
 
 ---
 
@@ -40,25 +40,25 @@ icon: LiBrainCircuit
 
 ### Key Prefix → Folder Routing
 
-| Prefix | Destination |
-|--------|-------------|
-| `KQL-` | `Detection-KQL/Queries/` |
-| `RULE-` | `Detection-KQL/Analytics-Rules/` |
-| `HUNTING-` | `Detection-KQL/Hunting-Queries/` |
-| `INTEL-` | `Threat-Hunting/TTPs/` |
-| `TTP-` | `Threat-Hunting/TTPs/` |
-| `HUNT-` | `Threat-Hunting/Campaigns/` |
-| `IR-` | `IR-DFIR/Cases/` |
-| `PLAYBOOK-` | `IR-DFIR/Playbooks/` |
-| `HARD-` | `Hardening/Controls/` |
-| `WDAC-` | `WDAC/Runbooks/` |
-| `OT-` | `OT-SCADA/Assets/` |
-| `PROJ-` | `Projects/` |
-| `INFO-` | `Research/Articles/` |
-| `TOOL-` | `Research/Tools/` |
-| `TRAINING-` | `Research/Training/` |
-| `CLAUDE-` | `Research/Claude/` |
-| `MTG-` | `Meetings/` |
+| Prefix      | Destination                      |
+| ----------- | -------------------------------- |
+| `KQL-`      | `Detection-KQL/Queries/`         |
+| `RULE-`     | `Detection-KQL/Analytics-Rules/` |
+| `HUNTING-`  | `Detection-KQL/Hunting-Queries/` |
+| `INTEL-`    | `Threat-Hunting/TTPs/`           |
+| `TTP-`      | `Threat-Hunting/TTPs/`           |
+| `HUNT-`     | `Threat-Hunting/Campaigns/`      |
+| `IR-`       | `IR-DFIR/Cases/`                 |
+| `PLAYBOOK-` | `IR-DFIR/Playbooks/`             |
+| `HARD-`     | `Hardening/Controls/`            |
+| `WDAC-`     | `WDAC/Runbooks/`                 |
+| `OT-`       | `OT-SCADA/Assets/`               |
+| `PROJ-`     | `Projects/`                      |
+| `INFO-`     | `Research/Articles/`             |
+| `TOOL-`     | `Research/Tools/`                |
+| `TRAINING-` | `Research/Training/`             |
+| `CLAUDE-`   | `Research/Claude/`               |
+| `MTG-`      | `Meetings/`                      |
 
 ---
 

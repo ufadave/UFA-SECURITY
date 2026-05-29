@@ -25,7 +25,7 @@ Systematically harden the Microsoft 365 / E5 environment across Entra ID, Intune
 - [[Hardening/Controls/|Hardening Controls]]
 - [[Hardening/Policies/|Policies]]
 - [[Hardening/Validation/|Validation]]
-- [[Threat-Hunting/TTPs/Fabian-Bader-Entra-Connect-SyncJacking|Entra SyncJacking]]
+- [[INTEL-Entra-Connect-SyncJacking-Hardening|Entra SyncJacking]]
 - [[Threat-Hunting/TTPs/Stryker-Breach-Handala-Intune-Wipe|Stryker/Intune Wipe]]
 
 ---

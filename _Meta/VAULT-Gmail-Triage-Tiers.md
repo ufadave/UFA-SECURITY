@@ -84,7 +84,7 @@ Follow up with `check mail` or `check mail quick` to generate notes for specific
 
 ## Related Notes
 
-- [[CLAUDE-Context-Brief]]
+- [[VAULT-Context-Brief]]
 - [[CLAUDE-Prompt-Template]]
 
 ---
