@@ -83,7 +83,14 @@ No current visibility into what your organisation looks like from the outside â€
 
 **Notes from call:**
 
-> _To be filled in post-demo._
+> Met with Dylan Rodgers and Garrett Zvoch from Censys.
+> - Unique space. Been around for 14 years. Started as a research project at the University of Michigan 
+> - Scans the internet continuously
+> - Works with SOC for enrichment, vulns and many threat intelligence teams. 
+> - Also for dynamic blocking rules with Firewalls using API. 
+> - Splunk integrator, recently introduced a Sentinel connector. 
+> - Not sure if data can be stored in Canada. 
+> 
 
 ---
 
