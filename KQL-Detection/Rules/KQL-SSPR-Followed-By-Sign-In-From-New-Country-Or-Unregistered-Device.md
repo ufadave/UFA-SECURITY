@@ -49,7 +49,7 @@ not self-initiated, treat as suspected account compromise and escalate immediate
 entirely. Admin credential resets should be IT-assisted via a break-glass process. The
 admin-CJones2 SSPR event observed during validation (2026-05-20) highlights this gap --
 raise as a separate hardening action independent of this detection.
-
+Ben is planning to address privileged accounts and SSPR when he does the Conditional Access Policies refactoring. 
 **Prerequisite:** AuditLogs and SigninLogs must be ingested into Sentinel via the Microsoft
 Entra ID Diagnostic Settings connector.
 

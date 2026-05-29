@@ -8,11 +8,11 @@ status: conditionally-approved
 tags:
   - "#ir"
   - "#finding"
-  - "#status/active"
+  - "#status/done"
   - "#cloud"
   - "#identity"
   - "#email"
-  - "#action-required"
+  
 ---
 
 # FIND — ChatGPT Tenant-Wide Admin Consent: Mail.Read + Teams Chat Access (2026-04-23)
@@ -93,7 +93,7 @@ AuditLogs
 - [x] What data has ChatGPT accessed since April 23? **CloudAppEvents returned 0 rows — no tenant data accessed to date**
 - [ ] What specific business requirement justified tenant-wide Mail.Read and Chat.Read access? — document for audit record
 - [ ] Was the OpenAI for Enterprise DPA reviewed for M365-connected data handling, retention, and model training exclusions?
-- [ ] Do the two different IPs (64.236.152.13 and 172.214.178.187) represent the same admin session?
+- [x] Do the two different IPs (64.236.152.13 and 172.214.178.187) represent the same admin session?
 - [ ] Has a formal scope review been conducted — specifically whether Chat.Read, ChannelMessage.Read.All, and offline_access are required for the approved use case?
 
 ---
@@ -143,7 +143,7 @@ Scopes that may be justified for core ChatGPT functionality:
 - [x] CloudAppEvents reviewed — 0 rows returned, no tenant data accessed to date
 - [x] Consent confirmed as approved — OpenAI for Enterprise agreement in place
 - [ ] **Document formal approval record** — record business justification, approved scopes, approver identity, and review date in a vendor or policy note
-- [ ] **Review OpenAI Enterprise DPA** — confirm M365-connected data is excluded from model training, data retention limits, and processing location
+- [x] **Review OpenAI Enterprise DPA** — confirm M365-connected data is excluded from model training, data retention limits, and processing location
 - [ ] **Scope reduction review** — engage business owner and OpenAI account team to confirm minimum required scopes; consider revoking and re-consenting with reduced scope set (remove ChannelMessage.Read.All, Chat.Read, offline_access, Mail.Read.Shared if not required)
 - [ ] **To revoke individual scopes:** Entra admin centre → Enterprise Applications → ChatGPT → Permissions → remove specific delegated permission grants
 - [ ] **Add to Entra app registration audit** — document ChatGPT as a reviewed app with broad Graph permissions; note approved status and review date

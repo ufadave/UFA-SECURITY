@@ -10,9 +10,9 @@ deployed: ""
 validated: ""
 tags:
   - "#hardening"
-  - "#status/draft"
+  - "#status/Postponed"
   - "#identity"
-  - "#action-required"
+ 
 ---
 
 # Hardening Control — Exclude Privileged Accounts From SSPR
@@ -47,7 +47,7 @@ allow an attacker to initiate a Storm-2949-style reset against any admin UPN in 
 ---
 
 ## Implementation
-
+Ben is going to address this as part of the Conditional Access Policy refactoring. 
 ### Method
 `Entra Admin Centre` — SSPR Properties and Groups configuration
 
@@ -159,6 +159,7 @@ from the group only.
 
 ## Changelog
 
-| Date | Change |
-|------|--------|
-| 2026-05-20 | Created -- prompted by admin-CJones2 SSPR event observed during KQL validation |
+| Date       | Change                                                                                                                                         |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-05-20 | Created -- prompted by admin-CJones2 SSPR event observed during KQL validation                                                                 |
+| 2026-5-27  | Spoke to Ben about this last week and confirmed again today that he's going to address this during the Conditional Access Policy refactoring.  |

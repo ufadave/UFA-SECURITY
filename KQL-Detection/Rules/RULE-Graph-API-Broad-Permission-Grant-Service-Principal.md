@@ -9,7 +9,7 @@ technique: "T1528 Steal Application Access Token, T1098.003 Account Manipulation
 status: "Validated"
 promoted_to_rule: true
 mde_rule_name: ""
-sentinel_rule_id: ""
+sentinel_rule_id: "821133bb-b13c-439f-80fb-d2bae6c175ca"
 tags:
   - "#detection"
   - "#detection/analytics-rule"
