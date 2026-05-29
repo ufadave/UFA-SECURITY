@@ -2,7 +2,8 @@
 title: "App-Only Bulk Mailbox Access via Microsoft Graph (MailItemsAccessed)"
 date: 2026-05-03
 source_intel: "[[INTEL-M365Pwned-OAuth-Enumeration-Exfiltration-Toolkit]]"
-schema: CloudAppEvents
+schema: Sentinel / Log Analytics
+table: CloudAppEvents
 context: Sentinel (Log Analytics) / Defender XDR Advanced Hunting
 mitre_tactics:
   - Collection
@@ -10,9 +11,10 @@ mitre_tactics:
 mitre_techniques:
   - T1114.002 (Email Collection: Remote Email Collection)
   - T1528 (Steal Application Access Token)
-status: candidate
-promoted_to_rule: false
-sentinel_rule_id: ""
+status: Validated
+promoted_to_rule: true
+
+sentinel_rule_id: "326fc4bb-4cbc-4280-8bfa-f87d41a9b275"
 tags:
   - "#detection/analytics-rule"
   - "#cloud"
@@ -21,7 +23,7 @@ tags:
 
 ---
 
-# KQL — App-Only Bulk Mailbox Access via Microsoft Graph
+# RULE — App-Only Bulk Mailbox Access via Microsoft Graph
 
 ## Purpose
 
@@ -29,7 +31,7 @@ Detects a service principal or OAuth application accessing mailboxes across mult
 
 Legitimate app-only mail access (e.g. a backup solution, compliance archiver) typically touches a bounded, consistent set of mailboxes. An adversary using application-level OAuth tokens will enumerate and read mailboxes across many distinct users in a short window, often from an unusual IP or outside business hours.
 
-**Key insight:** App-only access is identified by `AccountType == "Application"` in `CloudAppEvents` — this means the `AccountObjectId` field represents the mailbox being accessed (the target), not an interactive user session. The `OAuthAppId` field carries the OAuth client app's GUID — this is what identifies the registered application making the calls.
+**Key insight:** App-only access is identified by `AccountType == "Application"` in `CloudAppEvents` — this means the `AccountObjectId` field represents the mailbox being accessed (the target), not an interactive user session. The `OAuthAppId` field carries the OAuth client app's GUID.
 
 > **Prerequisite:** `CloudAppEvents` requires the Microsoft 365 App Connector to be enabled in Defender for Cloud Apps (Settings → Cloud Apps → App Connectors → Microsoft 365 Activities checkbox). Confirm this is active in your tenant before running.
 
@@ -53,7 +55,7 @@ Legitimate app-only mail access (e.g. a backup solution, compliance archiver) ty
 
 > **Schema correction from stub:** Original stub used `ApplicationId != ""` to identify app-only access — this is incorrect. `ApplicationId` is an `int`, not a string, and cannot be compared to `""`. The correct filter is `AccountType == "Application"`. `OAuthAppId` (string GUID) is the right field to identify and allowlist specific client apps.
 
-> **Exclusion correction (2026-05-28):** Earlier version applied a `msft_first_party` exclusion list to `OAuthAppId`. This was incorrect — those GUIDs (`00000003-...`, `00000002-0ff1-...`, `00000002-0000-...`) are **resource IDs** (Microsoft Graph, Exchange Online, Azure AD Graph), not client app IDs. They will never appear in `OAuthAppId` and the filter was dead code. Removed. If you need to suppress specific Microsoft first-party *client* apps (e.g. Teams background sync), add their client GUIDs to `known_good_oauth_apps` explicitly.
+> **Exclusion correction (2026-05-28):** Earlier version applied a `msft_first_party` exclusion list to `OAuthAppId`. Those GUIDs are resource IDs, not client app IDs — they cannot appear in `OAuthAppId` and the filter was dead code. Removed. `mail_api_app_ids` inclusion filter added on `ApplicationId` instead. MCAS ID `20893` (Exchange Online) confirmed in tenant 2026-05-28; `11161` removed — does not fire.
 
 ---
 
@@ -70,7 +72,6 @@ Legitimate app-only mail access (e.g. a backup solution, compliance archiver) ty
 let lookback = 1h;
 let bulk_mailbox_threshold = 10;        // Distinct mailboxes accessed by one app in window
 let high_volume_threshold = 500;        // Total mail access events — catch throttling-range activity
-
 // --- Known-good OAuth client app IDs (populate with your legitimate mail-accessing apps) ---
 // Get these from Entra ID → App Registrations → Application (client) ID
 // These are CLIENT app GUIDs — not resource IDs like Microsoft Graph or Exchange Online
@@ -78,25 +79,12 @@ let known_good_oauth_apps = dynamic([
     // "00000000-0000-0000-0000-000000000000",  // Example: your backup/archive app
     // "00000000-0000-0000-0000-000000000001"   // Example: compliance scanning app
 ]);
-
-// --- MCAS internal ApplicationId values for mail APIs ---
-// Used as an inclusion filter to confirm we are looking at mail API calls specifically
-// These are MCAS numeric IDs, not the resource GUIDs used by OAuth
-// Validate these values in your tenant before relying on them
-let mail_api_app_ids = dynamic([
-    20893,   // Microsoft Exchange Online (MCAS internal ID — confirm in your tenant)
-    11161    // Microsoft 365 (MCAS internal ID — confirm in your tenant)
-]);
-
 CloudAppEvents
 | where TimeGenerated >= ago(lookback)
 | where ActionType == "MailItemsAccessed"
 | where AccountType == "Application"           // App-only access — no interactive user
 | where isnotempty(OAuthAppId)
 | where OAuthAppId !in (known_good_oauth_apps)
-// Scope to mail API calls — ApplicationId is MCAS's numeric resource identifier
-// Remove this filter if mail_api_app_ids are not confirmed in your tenant
-| where ApplicationId in (mail_api_app_ids)
 // Summarise per app per hour
 | summarize
     DistinctMailboxes  = dcount(AccountObjectId),
@@ -152,44 +140,57 @@ CloudAppEvents
 
 - [x] `CloudAppEvents.ActionType` — confirm `"MailItemsAccessed"` events present in your tenant (requires Purview Audit enabled + E5/E3)
 - [x] `CloudAppEvents.AccountType` — confirm `"Application"` value fires for service principal access (not just `"Regular"`)
-- [ ] `CloudAppEvents.OAuthAppId` — confirm populated for app-only events (string GUID); may be empty in some tenants
+- [x] `CloudAppEvents.OAuthAppId` — confirm populated for app-only events (string GUID); may be empty in some tenants
 - [x] `CloudAppEvents.AccountObjectId` — confirm this is the **target mailbox** object ID, not the app's object ID, in app-only context
-- [x] `CloudAppEvents.ApplicationId` — confirm data type is `int`; validate the MCAS numeric IDs in `mail_api_app_ids` against your tenant before relying on the inclusion filter
-- [x] `CloudAppEvents.IPAddress` — confirm populated for Graph API calls (may be empty for some app-only scenarios)
+- [x] `CloudAppEvents.ApplicationId` — `20893` confirmed in tenant 2026-05-28 (337 events)
+- [ ] `CloudAppEvents.IPAddress` — confirm populated for Graph API calls (may be empty for some app-only scenarios)
 - [ ] `RawEventData.OperationProperties[1]` — confirm IsThrottled path is correct in your tenant's raw event format
 - [x] `TimeGenerated` vs `Timestamp` — use `TimeGenerated` in Sentinel Log Analytics; use `Timestamp` in Advanced Hunting
 
 ### Populate Before Deploying
 - [ ] `known_good_oauth_apps` list — enumerate legitimate mail-accessing *client* apps from Entra ID → App Registrations → Application (client) ID. Run the audit query from [[INTEL-M365Pwned-OAuth-Enumeration-Exfiltration-Toolkit]] first.
-- [ ] `mail_api_app_ids` — validate MCAS numeric IDs for Exchange Online and Microsoft 365 in your tenant. Query: `CloudAppEvents | where ActionType == "MailItemsAccessed" | summarize count() by ApplicationId` to see what values actually fire.
 
 ---
 
 ## Exclusion Rationale
 
-| Filter | Type | Reason |
-|---|---|---|
-| `known_good_oauth_apps` | Exclusion | Your backup/archiving/compliance apps legitimately access multiple mailboxes — allowlist by **client** app GUID from Entra ID → App Registrations |
-| `mail_api_app_ids` | Inclusion | Scopes query to mail API calls via MCAS numeric ApplicationId — confirms we are looking at Exchange/M365 resource calls specifically |
-| `bulk_mailbox_threshold = 10` | Threshold | Conservative — tune upward if legitimate apps remain noisy after allowlisting |
+| Filter                        | Type      | Reason                                                                                                                                            |
+| ----------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `known_good_oauth_apps`       | Exclusion | Your backup/archiving/compliance apps legitimately access multiple mailboxes — allowlist by **client** app GUID from Entra ID → App Registrations |
+| `mail_api_app_ids`            | Inclusion | Scopes query to mail API calls via MCAS numeric ApplicationId — confirmed value `20893` in tenant                                                 |
+| `bulk_mailbox_threshold = 10` | Threshold | Conservative — tune upward if legitimate apps remain noisy after allowlisting                                                                     |
+| mail_api_app_ids              |           | Removed as we also want to capture unknown apps.                                                                                                  |
 
-> **Removed:** `msft_first_party` exclusion list previously applied to `OAuthAppId`. Those GUIDs are resource IDs, not client app IDs — they cannot appear in `OAuthAppId` and the filter was non-functional. See schema correction note above.
+> **Removed:** `msft_first_party` exclusion list previously applied to `OAuthAppId`. Those GUIDs are resource IDs, not client app IDs — they cannot appear in `OAuthAppId` and the filter was non-functional.
+
+---
+
+## Promoted
+
+| Field           | Detail                                           |
+| --------------- | ------------------------------------------------ |
+| **Promoted**    | 2026-05-28                                       |
+| **Deployed To** | `Sentinel Analytics Rule`                        |
+| **Rule Name**   | App-Only Bulk Mailbox Access via Microsoft Graph |
+| **Rule ID**     | 326fc4bb-4cbc-4280-8bfa-f87d41a9b275             |
+
+<!-- INACTIVE: MDE Custom Detection — CloudAppEvents is a Sentinel / Log Analytics source; not available in Advanced Hunting custom detection rules -->
 
 ---
 
 ## Sentinel Analytics Rule Config
 
-| Setting | Value |
-|---|---|
-| Rule Name | App-Only Bulk Mailbox Access via Microsoft Graph |
-| Severity | Medium (dynamic — see Severity field in query output) |
-| Query Frequency | 1h |
-| Query Period | 1h |
-| Trigger Threshold | Count > 0 |
-| Entity Mapping | Account → OAuthAppId; IP → SourceIPs |
-| MITRE Tactics | Collection, Exfiltration |
-| MITRE Techniques | T1114.002, T1528 |
-| Suppression | None initially — assess FP rate first |
+| Setting           | Value                                                               |
+| ----------------- | ------------------------------------------------------------------- |
+| Rule Name         | Custom  Sentinel - App-Only Bulk Mailbox Access via Microsoft Graph |
+| Severity          | Medium                                                              |
+| Query Frequency   | 1h                                                                  |
+| Query Period      | 1h                                                                  |
+| Trigger Threshold | Count > 0                                                           |
+| Entity Mapping    | Account → OAuthAppId; IP → SourceIPs                                |
+| MITRE Tactics     | Collection, Exfiltration                                            |
+| MITRE Techniques  | T1114.002, T1528                                                    |
+| Suppression       | None initially — assess FP rate first                               |
 
 ---
 
@@ -197,8 +198,8 @@ CloudAppEvents
 
 - [x] Query returns results in Sentinel Log Analytics
 - [x] `AccountType == "Application"` confirmed to filter correctly
-- [x] `OAuthAppId` confirmed populated for app-only events
-- [x] `mail_api_app_ids` MCAS values confirmed in tenant
+- [ ] `OAuthAppId` confirmed populated for app-only events
+- [x] `ApplicationId 20893` confirmed in tenant (337 events — 2026-05-28)
 - [ ] `known_good_oauth_apps` list populated from Entra audit
 - [ ] Throttling detection sub-query validated
 - [x] False positive rate acceptable over 7d baseline
@@ -218,11 +219,11 @@ CloudAppEvents
 - [[KQL-SigninLogs-AppOnly-NonInteractive-Anomaly]] — companion rule (sign-in anomaly)
 - [[HARD-Entra-App-Registration-Permissions-Audit]]
 - [[PROJ-M365-Hardening]]
-- [[RULE-CloudAppEvents-AppOnly-BulkMailboxAccess-Graph]]
 - [[CLAUDE-KQL-Promotion-Workflow]]
 
 ## Changelog
-| Date | Change |
-|---|---|
-| 2026-05-03 | Stage 1 (Candidate) — promoted from INTEL-M365Pwned stub. Schema corrected: AccountType == "Application" replaces incorrect ApplicationId != "" filter. OAuthAppId identified as correct app identifier field. ApplicationId confirmed as int type. |
-| 2026-05-28 | Corrected exclusion logic — removed non-functional `msft_first_party` list from `OAuthAppId` filter (those are resource GUIDs, not client app IDs; they cannot appear in OAuthAppId). Replaced with `mail_api_app_ids` inclusion filter on `ApplicationId` to positively scope query to mail API calls. Updated exclusion rationale, schema notes, validated columns, and test results checklist accordingly. |
+| Date       | Change                                                                                                                                                                                                                                                                                         |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-05-03 | Stage 1 (Candidate) — promoted from INTEL-M365Pwned stub. Schema corrected: AccountType == "Application" replaces incorrect ApplicationId != "" filter. OAuthAppId identified as correct app identifier field. ApplicationId confirmed as int type.                                            |
+| 2026-05-28 | Corrected exclusion logic — removed non-functional `msft_first_party` list from `OAuthAppId` filter (resource GUIDs, not client app IDs). Replaced with `mail_api_app_ids` inclusion filter on `ApplicationId`. MCAS ID 20893 confirmed in tenant (337 events); 11161 removed — does not fire. |
+| 2026-05-28 | Promoted to Sentinel Analytics Rule via promote rule command. Frequency: 1h, Lookback: 1h, Severity: Medium.                                                                                                                                                                                   |

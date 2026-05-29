@@ -9,8 +9,7 @@ mitre:
 detection_candidate: false
 tags:
   - "#intel"
-  - "#status/draft"
-  - "#pending-review"
+  - "#status/done"
   - "#identity"
   - "#cloud"
 ---
@@ -50,7 +49,8 @@ tags:
 > governance to AI agents.
 
 ---
-
+Got Claude to access link. Note created:
+[[INTEL-AI-Assisted-Entra-ID-Tenant-Destruction]]
 ## Relevance to Environment
 
 > Pending full article extraction. Likely high relevance given:
@@ -75,8 +75,8 @@ tags:
 
 ## Hardening Actions
 
-- [ ] Complete article review via source URL
-- [ ] Assess whether agentic workflow governance recommendations apply to current AI tool posture (ChatGPT, Codex)
+- [x] Complete article review via source URL
+- [x] Assess whether agentic workflow governance recommendations apply to current AI tool posture (ChatGPT, Codex)
 
 ---
 

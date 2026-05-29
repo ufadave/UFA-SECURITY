@@ -18,8 +18,7 @@ promoted_kql_notes:
   - "[[KQL-SigninLogs-AppOnly-NonInteractive-Anomaly]]"
 tags:
   - "#intel"
-  - "#status/draft"
-  - "#action-required"
+  - "#status/done"
   - "#cloud"
   - "#identity"
   - "#email"

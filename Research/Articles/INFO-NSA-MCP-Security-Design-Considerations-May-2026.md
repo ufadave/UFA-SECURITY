@@ -1,11 +1,10 @@
 ---
 title: INFO-NSA-MCP-Security-Design-Considerations-May-2026
 date: 2026-05-27
-source: "Email attachment — CSI_MCP_SECURITY.pdf (NSA Cybersecurity Information Sheet U/OO/6030316-26 | PP-26-1834 | May 2026 Ver. 1.0)"
+source: Email attachment — CSI_MCP_SECURITY.pdf (NSA Cybersecurity Information Sheet U/OO/6030316-26 | PP-26-1834 | May 2026 Ver. 1.0)
 tags:
   - "#resource"
   - "#status/draft"
-  - "#action-required"
   - "#cloud"
   - "#identity"
 ---
