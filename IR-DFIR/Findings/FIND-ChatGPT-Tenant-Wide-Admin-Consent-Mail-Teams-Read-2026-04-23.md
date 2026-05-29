@@ -4,7 +4,7 @@ date: 2026-05-21
 case_id:
 alert_id:
 severity: Medium
-status: conditionally-approved
+status: done
 tags:
   - "#ir"
   - "#finding"
@@ -142,11 +142,11 @@ Scopes that may be justified for core ChatGPT functionality:
 - [x] Permission scopes confirmed via AuditLogs query
 - [x] CloudAppEvents reviewed — 0 rows returned, no tenant data accessed to date
 - [x] Consent confirmed as approved — OpenAI for Enterprise agreement in place
-- [ ] **Document formal approval record** — record business justification, approved scopes, approver identity, and review date in a vendor or policy note
+- [x] **Document formal approval record** — record business justification, approved scopes, approver identity, and review date in a vendor or policy note
 - [x] **Review OpenAI Enterprise DPA** — confirm M365-connected data is excluded from model training, data retention limits, and processing location
-- [ ] **Scope reduction review** — engage business owner and OpenAI account team to confirm minimum required scopes; consider revoking and re-consenting with reduced scope set (remove ChannelMessage.Read.All, Chat.Read, offline_access, Mail.Read.Shared if not required)
-- [ ] **To revoke individual scopes:** Entra admin centre → Enterprise Applications → ChatGPT → Permissions → remove specific delegated permission grants
-- [ ] **Add to Entra app registration audit** — document ChatGPT as a reviewed app with broad Graph permissions; note approved status and review date
+- [x] **Scope reduction review** — engage business owner and OpenAI account team to confirm minimum required scopes; consider revoking and re-consenting with reduced scope set (remove ChannelMessage.Read.All, Chat.Read, offline_access, Mail.Read.Shared if not required)
+- [x] **To revoke individual scopes:** Entra admin centre → Enterprise Applications → ChatGPT → Permissions → remove specific delegated permission grants
+- [x] **Add to Entra app registration audit** — document ChatGPT as a reviewed app with broad Graph permissions; note approved status and review date
 
 ### CloudAppEvents investigation query
 
