@@ -48,7 +48,7 @@ DeviceProcessEvents
 ---
 
 ## Tags
-#intel #supply-chain #npm #pypi #axios #litellm #nextron #yara #t1195 #teamPCP #action-required #staus/active
+#intel #supply-chain #npm #pypi #axios #litellm #nextron #yara #t1195 #teamPCP #action-required #status/done
 
 ---
 
