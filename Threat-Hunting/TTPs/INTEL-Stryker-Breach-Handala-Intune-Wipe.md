@@ -26,7 +26,7 @@ On March 11, 2026, Iranian hacktivist group Handala gained Global Administrator 
 **This is the exact attack scenario your environment needs to defend against.** Your organisation runs Microsoft Intune across ~150+ endpoints with Entra ID in a hybrid AD-joined configuration — identical architecture to Stryker. Key parallels:
 
 - Intune is your MDM — a compromised Global Admin could issue fleet-wide wipe commands
-- Hybrid Entra Connect sync creates the SyncJacking escalation path (see [[Threat-Hunting/TTPs/Fabian-Bader-Entra-Connect-SyncJacking]])
+- Hybrid Entra Connect sync creates the SyncJacking escalation path (see [[INTEL-Entra-Connect-SyncJacking-Hardening]])
 - Admin credential exposure via infostealer logs is an ongoing risk
 - BYOD enrolled devices would be in scope for a wipe attack
 - Standard MFA (push/OTP) does not protect against AiTM — only FIDO2/Windows Hello for Business does
@@ -84,7 +84,7 @@ SigninLogs
 ---
 
 ## Hardening Actions — Priority
-- [ ] **Entra Connect SyncJacking hardening** — apply GA fix (see [[Threat-Hunting/TTPs/Fabian-Bader-Entra-Connect-SyncJacking]])
+- [ ] **Entra Connect SyncJacking hardening** — apply GA fix (see [[INTEL-Entra-Connect-SyncJacking-Hardening]])
 - [x] **Intune admin access review** — audit who has Intune Administrator and Global Admin roles
 - [ ] **Phishing-resistant MFA** — evaluate FIDO2/Windows Hello for Business for admin accounts
 - [ ] **Conditional Access** — restrict Intune admin console access to compliant, managed devices only
@@ -95,7 +95,7 @@ SigninLogs
 ---
 
 ## Related Notes
-- [[Threat-Hunting/TTPs/Fabian-Bader-Entra-Connect-SyncJacking]] — SyncJacking GA hardening
+- [[INTEL-Entra-Connect-SyncJacking-Hardening]] — SyncJacking GA hardening
 - [[Threat-Hunting/TTPs/Jasper-Sleet-North-Korean-IT-Worker-Infiltration]] — identity-based attack patterns
 - [[OT-SCADA/Compliance/CISA-Iranian-APT-PLC-Exploitation-AA26-097A]] — same threat actor cluster (Handala/Iranian APT)
 

@@ -3,7 +3,7 @@ date:
 detection_candidate: true
 ---
 
-# Intel — Fabian Bader: Entra Connect SyncJacking — GA Security Hardening
+# Intel -Entra Connect SyncJacking — GA Security Hardening
 
 **Source:** https://cloudbrothers.info/
 **Tweet:** https://x.com/fabian_bader/status/2047592114872033624

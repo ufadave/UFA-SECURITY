@@ -15,7 +15,7 @@ Three notes live in `Research/Claude/` to support working with Claude effectivel
 
 ## The Three Notes
 
-### [[CLAUDE-Context-Brief]] — Session Orientation
+### [[VAULT-Context-Brief]] — Session Orientation
 Solves the *what Claude needs to know* problem.
 
 Inside this project Claude has full context from the project instructions. Outside it — a new chat, a different device, a colleague's machine — Claude starts blank. Paste this note at the start of any session to restore full working context without re-explaining your stack, vault conventions, or current priorities.
@@ -52,7 +52,7 @@ The note includes three worked examples for the most common complex scenarios: n
 
 ---
 
-### [[CLAUDE-KQL-Conventions]] — Schema Reference
+### [[VAULT-KQL-Conventions]] — Schema Reference
 Solves the *environment-specific schema gotchas* problem.
 
 KQL schema issues keep surfacing across sessions — `RemoteIPType` existence, `parse_json()` requirements, `AADServicePrincipalSignInLogs` connectivity, `IpAddress` variance in SecurityEvent. This note consolidates all known-good and known-problematic columns per table so the same caveat doesn't need flagging from scratch every time.
