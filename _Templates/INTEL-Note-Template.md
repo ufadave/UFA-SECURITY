@@ -4,6 +4,7 @@ date: <% tp.date.now("YYYY-MM-DD") %>
 source: ""
 author: ""
 mitre:
+severity: Medium
   - ""
 detection_candidate: false
 tags:
