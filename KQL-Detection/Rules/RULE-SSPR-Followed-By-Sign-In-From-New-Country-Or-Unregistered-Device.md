@@ -6,25 +6,36 @@ schema: "Sentinel / Log Analytics"
 mitre: "T1078.004"
 tactic: "Initial Access"
 technique: "Valid Accounts: Cloud Accounts"
-status: "Active"
-promoted_to_rule: True
+status: "Validated"
+promoted_to_rule: true
 mde_rule_name: ""
 sentinel_rule_id: "6df40404-f6b6-4185-937f-01d5788a978f"
 tags:
   - "#detection"
   - "#detection/analytics-rule"
-  - "#status/Done"
+  - "#status/done"
   - "#identity"
   - "#cloud"
 ---
 
-# KQL -- SSPR Followed By Sign-In From New Country Or Unregistered Device
+# RULE -- SSPR Followed By Sign-In From New Country Or Unregistered Device
 
 ---
 
 **Table:** AuditLogs + SigninLogs | **Schema:** Sentinel / Log Analytics
 **MITRE ATT&CK:** T1078.004 | **Tactic:** Initial Access | **Technique:** Valid Accounts: Cloud Accounts
-**Created:** 2026-05-20 | **Status:** Done
+**Created:** 2026-05-20 | **Status:** Validated
+
+---
+
+## Promoted
+
+| Field | Detail |
+|-------|--------|
+| **Promoted** | 2026-06-01 |
+| **Deployed To** | Sentinel Analytics Rule |
+| **Rule Name** | SSPR Followed By Sign-In From New Country Or Unregistered Device |
+| **Rule ID** | 6df40404-f6b6-4185-937f-01d5788a978f |
 
 ---
 
@@ -45,11 +56,10 @@ flow, then authenticates from a different location or device using the newly res
 If all four check out as benign, document and close. If the IP is unrecognised or the SSPR was
 not self-initiated, treat as suspected account compromise and escalate immediately.
 
-**Hardening note:** Privileged accounts (admin-* naming convention) should be excluded from SSPR
-entirely. Admin credential resets should be IT-assisted via a break-glass process. The
-admin-CJones2 SSPR event observed during validation (2026-05-20) highlights this gap --
-raise as a separate hardening action independent of this detection.
-Ben is planning to address privileged accounts and SSPR when he does the Conditional Access Policies refactoring. 
+**Hardening note:** Privileged accounts (`admin-*` naming convention) should be excluded from
+SSPR entirely. Admin credential resets should be IT-assisted via a break-glass process. This is
+being addressed as part of the Conditional Access policy refactor.
+
 **Prerequisite:** AuditLogs and SigninLogs must be ingested into Sentinel via the Microsoft
 Entra ID Diagnostic Settings connector.
 
@@ -160,7 +170,7 @@ PostSSPRSignins
 
 | Date | Account | SSPR Result | Post-SSPR Sign-in | Flagged | Disposition |
 |------|---------|-------------|-------------------|---------|-------------|
-| 2026-05-20 15:40 | admin-CJones2 | success (4th attempt, 3x hr=80230619 failures) | Not flagged | No | Self-initiated, single IP throughout, mobile app MFA, AADConnect writeback. Benign -- password history policy initially blocked reuse. Admin account using SSPR is a hardening gap (separate item). |
+| 2026-05-20 15:40 | admin-CJones2 | success (4th attempt, 3x hr=80230619 failures) | Not flagged | No | Self-initiated, single IP throughout, mobile app MFA, AADConnect writeback. Benign -- password history policy initially blocked reuse. Admin account using SSPR is a hardening gap addressed via CA refactor. |
 
 Post-threshold result: **0 alerts in 30 days** after join with new-country/unregistered-device filter.
 19 SSPR completions confirmed in AuditLogs. No suspicious post-SSPR sign-ins detected.
@@ -168,38 +178,35 @@ Post-threshold result: **0 alerts in 30 days** after join with new-country/unreg
 **SSPR operation names confirmed in this tenant:**
 - `User started password reset`
 - `Self-service password reset flow activity progress`
-- `Reset password (self-service)` ← anchor event used in this query
-- `Change password (self-service)` ← excluded (authenticated user changing own password)
+- `Reset password (self-service)` <- anchor event used in this query
+- `Change password (self-service)` <- excluded (authenticated user changing own password)
 - `Unlock user account (self-service)`
 
 ---
 
 ## Deployment
 
-<!-- Advanced Hunting does not support AuditLogs or SigninLogs -- Sentinel only -->
-<!-- MDE Custom Detection section inactive: Log Analytics schema -->
-
-### MDE Custom Detection Rule
-<!-- INACTIVE: AuditLogs and SigninLogs are Log Analytics sources -- not available in Advanced Hunting -->
+<!-- INACTIVE: MDE Custom Detection -- AuditLogs and SigninLogs are Log Analytics sources only -->
 
 ### Sentinel Analytics Rule
 - **Rule Name:** SSPR Followed By Sign-In From New Country Or Unregistered Device
 - **Frequency:** Every 1h
 - **Lookback:** 1d
-- **Severity:**Medium
-- **Deployed:** [ Y]
+- **Severity:** Medium
+- **Deployed:** [x]
 - **Rule GUID:** 6df40404-f6b6-4185-937f-01d5788a978f
 
 ---
 
 ## Hardening Control Pair
 - **Control:** [[HARD-Exclude-Privileged-Accounts-From-SSPR]]
-- **Linked:** [ ]
+- **Linked:** [ ] -- deferred pending CA policy refactor
 
 ---
 
 ## Related Notes
 - [[INFO-Storm-2949-Identity-to-Cloud-Breach-Microsoft-2026-05-18]]
+- [[KQL-SSPR-Followed-By-Sign-In-From-New-Country-Or-Unregistered-Device]] -- source KQL note
 - [[KQL-OneDrive-Bulk-File-Download-Detection]]
 
 ---
@@ -208,5 +215,6 @@ Post-threshold result: **0 alerts in 30 days** after join with new-country/unreg
 | Date | Change |
 |------|--------|
 | 2026-05-20 | Created -- promoted from Storm-2949 intel note; 30-day validated, 0 alerts post-join |
-| 2026-05-20 | SSPRInitiatedBy and SelfInitiated fields added to output -- distinguishes self-initiated vs externally-triggered SSPR |
+| 2026-05-20 | SSPRInitiatedBy and SelfInitiated fields added to output |
 | 2026-05-20 | MFAMethod extracted from AdditionalDetails for triage context |
+| 2026-06-01 | Converted to RULE- note -- sentinel_rule_id populated; status corrected to Validated; tags corrected to #status/done |

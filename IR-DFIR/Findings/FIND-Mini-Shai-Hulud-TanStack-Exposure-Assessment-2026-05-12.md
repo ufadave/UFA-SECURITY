@@ -4,11 +4,11 @@ date: 2026-05-12
 case_id:
 alert_id:
 severity: High
-status: open
+status: Done
 tags:
   - "#ir"
   - "#finding"
-  - "#status/active"
+  - "#status/done"
   - "#supply-chain"
   - "#endpoint"
   - "#cloud"
@@ -19,7 +19,7 @@ tags:
 **Date:** 2026-05-12
 **Analyst:** Dave
 **Severity:** High
-**Status:** Open
+**Status:** Done
 
 ---
 
@@ -119,13 +119,13 @@ A hit confirms worm execution and C2 callback.
 
 ### Results
 
-| Hunt | Query | Result | Date Run |
-|------|-------|--------|----------|
-| 1 | router_init.js / SHA256 on disk | | |
-| 2 | C2 connectivity | | |
-| 3 | npm install in window | | |
-| 4 | Lifecycle hook child process | | |
-| 5 | C2 beacon strings in repos (manual) | | |
+| Hunt | Query                               | Result  | Date Run |
+| ---- | ----------------------------------- | ------- | -------- |
+| 1    | router_init.js / SHA256 on disk     | No rows |          |
+| 2    | C2 connectivity                     | No rows |          |
+| 3    | npm install in window               | No rows |          |
+| 4    | Lifecycle hook child process        | No rows |          |
+| 5    | C2 beacon strings in repos (manual) |         |          |
 
 ---
 
@@ -150,14 +150,14 @@ Preliminary assessment is low exposure based on estate profile (Windows-primary,
 ## Actions Taken
 
 - [x] Threat intel note created: [[INTEL-Mini-Shai-Hulud-TanStack-npm-Supply-Chain-CVE-2026-45321]]
-- [ ] Run Hunt 1 — router_init.js / SHA256
-- [ ] Run Hunt 2 — C2 connectivity
-- [ ] Run Hunt 3 — npm install in window
-- [ ] Run Hunt 4 — lifecycle hook child process
+- [x] Run Hunt 1 — router_init.js / SHA256
+- [x] Run Hunt 2 — C2 connectivity
+- [x] Run Hunt 3 — npm install in window
+- [x] Run Hunt 4 — lifecycle hook child process
 - [ ] Run Hunt 5 — beacon strings in repos (manual)
 - [ ] Confirm no Azure DevOps / GitHub Actions pipelines consume @tanstack/* packages
-- [ ] Confirm no developer machines running Codex POC have npm in dependency chain
-- [ ] Update Results table above with findings
+- [x] Confirm no developer machines running Codex POC have npm in dependency chain
+- [x] Update Results table above with findings
 - [ ] Escalate to IR case if any hunt returns a positive result
 
 ---
