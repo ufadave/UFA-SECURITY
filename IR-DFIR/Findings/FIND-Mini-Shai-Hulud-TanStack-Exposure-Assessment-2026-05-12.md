@@ -4,7 +4,7 @@ date: 2026-05-12
 case_id:
 alert_id:
 severity: High
-status: Done
+status: done
 tags:
   - "#ir"
   - "#finding"
@@ -19,7 +19,7 @@ tags:
 **Date:** 2026-05-12
 **Analyst:** Dave
 **Severity:** High
-**Status:** Done
+**Status:** done
 
 ---
 

@@ -3,11 +3,11 @@ date: 2026-05-12 00:00
 case_id: INC-2026-051200000
 severity: "Critical"
 type: "Supply Chain Compromise / Credential Theft"
-status: "Draft"
-closed: ""
+status: "done"
+closed: "yes"
 tags:
   - "#ir"
-  - "#status/draft"
+  - "#status/done"
   - "#supply-chain"
   - "#endpoint"
   - "#cloud"

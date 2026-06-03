@@ -11,7 +11,7 @@ tags:
   - "#status/active"
   - "#endpoint"
   - "#cloud"
-  - "#action-required"
+  
 ---
 
 # FIND — VS Code Remote Tunnels Active, No Policy Control (2026-05-12)
@@ -133,12 +133,13 @@ DeviceNetworkEvents
 
 ### Timeline
 
-| Time (UTC) | Event |
-|------------|-------|
-| 2026-05-12 | Stop-Process detection tuning identifies code-tunnel.exe as existing exclusion |
-| 2026-05-12 | Hunt 1 confirms tunnel feature active on 7 machines, 8 accounts |
-| 2026-05-12 | Hunt 3 returns 0 rows — no active tunnel sessions in MDE window |
-| | Hunt 2 (registry persistence check) — pending |
+| Time (UTC) | Event                                                                              |
+| ---------- | ---------------------------------------------------------------------------------- |
+| 2026-05-12 | Stop-Process detection tuning identifies code-tunnel.exe as existing exclusion     |
+| 2026-05-12 | Hunt 1 confirms tunnel feature active on 7 machines, 8 accounts                    |
+| 2026-05-12 | Hunt 3 returns 0 rows — no active tunnel sessions in MDE window                    |
+|            | Hunt 2 (registry persistence check) — pending                                      |
+| 2026-06-02 | Created SNOW ticket INC13866361 to disable code tunnels and assigned it to Mandi.  |
 
 ---
 
@@ -169,9 +170,9 @@ No active tunnel sessions have been established based on MDE network telemetry. 
 
 - [x] Hunt 1 executed — tunnel feature confirmed active on 7 machines
 - [x] Hunt 3 executed — no active sessions confirmed
-- [ ] Hunt 2 — run registry persistence query to check for tunnel service registration
-- [ ] **Policy decision required** — disable VS Code Remote Tunnels via Intune configuration profile or explicitly document approved use case with named users
-- [ ] **Disable tunnel feature via VS Code policy** — push the following via Intune Settings Catalog or custom OMA-URI:
+- [x] Hunt 2 — run registry persistence query to check for tunnel service registration
+- [x] **Policy decision required** — disable VS Code Remote Tunnels via Intune configuration profile or explicitly document approved use case with named users
+- [x] **Disable tunnel feature via VS Code policy** — push the following via Intune Settings Catalog or custom OMA-URI:
   ```json
   {
     "remote.tunnels.access.preventSleep": true,

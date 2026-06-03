@@ -8,9 +8,9 @@ status: open
 tags:
   - "#ir"
   - "#finding"
-  - "#status/draft"
+  - "#status/done"
   - "#endpoint"
-  - "#action-required"
+  
 ---
 
 # FIND — Site24x7 Unapproved Agent Discovery
@@ -18,7 +18,7 @@ tags:
 **Date:** 2026-05-26
 **Analyst:** Dave
 **Severity:** Medium
-**Status:** Open
+**Status:** done
 
 ---
 
