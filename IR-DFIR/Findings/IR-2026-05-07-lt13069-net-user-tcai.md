@@ -18,7 +18,7 @@ tags:
 **Date:** 2026-05-07
 **Analyst:** Dave
 **Severity:** Medium (pending IT confirmation of user roles)
-**Status:** Open
+**Status:** done
 
 ---
 
@@ -152,11 +152,11 @@ SecurityEvent
 
 ## Actions Taken
 
-- [ ] Confirm `tsandqui` role with IT manager
-- [ ] Confirm `tcai` account scope (local vs domain) on `lt13069`
-- [ ] Run pivot queries 1–5 and attach results
-- [ ] If unauthorised — escalate to `IR-` case and notify HR
-- [ ] If authorised — close as Benign with rationale documented
+- [x] Confirm `tsandqui` role with IT manager
+- [x] Confirm `tcai` account scope (local vs domain) on `lt13069`
+- [x] Run pivot queries 1–5 and attach results
+- [x] If unauthorised — escalate to `IR-` case and notify HR
+- [x] If authorised — close as Benign with rationale documented
 - [ ] Cross-reference with [[HUNTING-net-user-password-change]] as sample case
 
 ---
@@ -164,7 +164,7 @@ SecurityEvent
 ## Escalate to Case?
 
 - [ ] Yes — create `IR-` case note: [[]]
-- [ ] No — closing as: _pending IT response_
+- [x] No — closing as: _pending IT response_
 
 ---
 
