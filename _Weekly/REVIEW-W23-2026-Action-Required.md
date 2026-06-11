@@ -4,7 +4,7 @@ week: 23
 type: action-required-review
 tags:
   - "#weekly"
-  - "#action-required-review"
+ 
 ---
 
 # Action Required — Week 23 Review

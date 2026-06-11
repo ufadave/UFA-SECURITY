@@ -4,11 +4,11 @@ date: 2026-05-12
 case_id:
 alert_id:
 severity: Medium
-status: open
+status: done
 tags:
   - "#ir"
   - "#finding"
-  - "#status/active"
+  - "#status/done"
   - "#endpoint"
   - "#cloud"
   
@@ -19,20 +19,20 @@ tags:
 **Date:** 2026-05-12
 **Analyst:** Dave
 **Severity:** Medium
-**Status:** Open
+**Status:** done
 
 ---
 
 ## Source
 
-| Field | Value |
-|-------|-------|
-| **Alert / Signal** | Proactive hunt — VS Code tunnel activity investigation following Stop-Process detection tuning |
-| **Platform** | MDE Advanced Hunting |
-| **Affected Asset(s)** | lt12865, lt10297, lt13209, lt13389, lt12629, lt11966, lt10259 |
-| **Affected User(s)** | dpavlaki, nchriste, mhabib, nbhan, glawson, admin-mrieger, mrieger, joishi |
-| **Detection Time** | 2026-05-12 |
-| **Triage Time** | 2026-05-12 |
+| Field                 | Value                                                                                          |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| **Alert / Signal**    | Proactive hunt — VS Code tunnel activity investigation following Stop-Process detection tuning |
+| **Platform**          | MDE Advanced Hunting                                                                           |
+| **Affected Asset(s)** | lt12865, lt10297, lt13209, lt13389, lt12629, lt11966, lt10259                                  |
+| **Affected User(s)**  | dpavlaki, nchriste, mhabib, nbhan, glawson, admin-mrieger, mrieger, joishi                     |
+| **Detection Time**    | 2026-05-12                                                                                     |
+| **Triage Time**       | 2026-05-12                                                                                     |
 
 ---
 
@@ -181,7 +181,7 @@ No active tunnel sessions have been established based on MDE network telemetry. 
   ```
   Alternatively, blocklist `code-tunnel.exe` execution via Intune or WDAC
 - [ ] **Address admin-mrieger / lt13389** — admin account should not be running VS Code interactively; review whether admin-mrieger is using the admin account for day-to-day work and remediate if so
-- [ ] **Communicate to affected users** — if tunnels are not an approved use case, notify dpavlaki, nchriste, mhabib, nbhan, glawson, mrieger, joishi that the feature will be disabled
+- [x] **Communicate to affected users** — if tunnels are not an approved use case, notify dpavlaki, nchriste, mhabib, nbhan, glawson, mrieger, joishi that the feature will be disabled
 - [ ] **Remove code-tunnel.exe exclusion from Stop-Process detection** once policy control is confirmed — the exclusion was added to suppress noise but removes visibility into tunnel activity
 
 ---
