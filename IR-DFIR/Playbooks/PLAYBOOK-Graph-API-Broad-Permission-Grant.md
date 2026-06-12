@@ -6,13 +6,13 @@ rule: "[[RULE-Graph-API-Broad-Permission-Grant-Service-Principal]]"
 mitre: "T1528, T1098.003"
 tactic: "Persistence, Privilege Escalation"
 severity_range: "High / Critical"
-status: "Active"
+status: "done"
 tags:
   - "#ir"
   - "#playbook"
   - "#cloud"
   - "#identity"
-  - "#status/active"
+  - "#status/done"
 ---
 
 # Playbook — Graph API Broad Permission Grant to Service Principal
