@@ -5,14 +5,13 @@ analyst: Dave
 mitre: "T1528, T1539, T1087.004, T1114.002, T1530, T1137.005, T1136.003, T1078.004"
 tactic: "Persistence, Collection, Discovery, Defence Evasion"
 technique: "Steal Application Access Token, Steal Web Session Cookie, Cloud Account Discovery, Remote Email Collection, Data from Cloud Storage, Cloud Account Persistence"
-status: "Active"
+status: "done"
 tags:
   - "#hunt"
-  - "#status/active"
   - "#identity"
   - "#cloud"
   - "#email"
-  - "#action-required"
+  - "#status/done"
 ---
 
 # Hunt Campaign — Long Duration AiTM Token Access Graph API Reconnaissance
