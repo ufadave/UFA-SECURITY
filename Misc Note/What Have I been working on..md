@@ -3,7 +3,7 @@
 ## Project
 - advisor on the WDAC project.
 - M365 hardening. Devices up to 85% if you apply the filters.
-- GreyNoise POC.  (Not much to do there.)
+- GreyNoise POV.  (Not much to do there.)
 - Stale Data cleanup (zero activity)
 
 ## Day to Day

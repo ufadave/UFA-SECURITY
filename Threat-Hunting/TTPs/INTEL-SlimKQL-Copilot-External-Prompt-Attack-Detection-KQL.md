@@ -116,7 +116,7 @@ CopilotActivity
 ```
 
 ### Validated Columns
-- [ ] `CopilotActivity` table -- confirm connector is enabled and data is flowing
+- [x] `CopilotActivity` table -- confirm connector is enabled and data is flowing
 - [ ] `AdditionalDetails` field structure -- review actual SlimKQL query for correct field paths
 - [ ] Verify `EventSource` / `EventType` values for Copilot Search activity in this tenant
 

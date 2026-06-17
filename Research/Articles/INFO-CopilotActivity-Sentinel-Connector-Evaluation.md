@@ -1,12 +1,11 @@
 ---
 title: INFO-CopilotActivity-Sentinel-Connector-Evaluation
 date: 2026-06-16
-source: "https://windowsforum.com/threads/copilot-data-connector-for-microsoft-sentinel-public-preview-and-soc-benefits.400146/"
+source: https://windowsforum.com/threads/copilot-data-connector-for-microsoft-sentinel-public-preview-and-soc-benefits.400146/
 tags:
   - "#resource"
-  - "#status/draft"
   - "#cloud"
-  - "#action-required"
+  - status/done
 ---
 
 # INFO -- CopilotActivity Sentinel Data Connector: Evaluation and Recommendation
@@ -148,10 +147,10 @@ Before enabling the connector, confirm:
 
 ## Actions
 
-- [ ] Confirm Purview UAL audit logging is active and capturing Copilot events
-- [ ] Install Microsoft Copilot solution from Sentinel Content Hub
-- [ ] Enable the CopilotActivity data connector
-- [ ] Configure table-level retention: 90 days Analytics tier, then Lake tier
+- [x] Confirm Purview UAL audit logging is active and capturing Copilot events
+- [x] Install Microsoft Copilot solution from Sentinel Content Hub
+- [x] Enable the CopilotActivity data connector
+- [x] Configure table-level retention: 90 days Analytics tier, then Lake tier
 - [ ] After 7 days, run a baseline query to confirm data is flowing:
   `CopilotActivity | summarize count() by RecordType | order by count_ desc`
 - [ ] Build detection rules from [[INTEL-SlimKQL-Copilot-External-Prompt-Attack-Detection-KQL]]
