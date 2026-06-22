@@ -108,21 +108,27 @@ DeviceProcessEvents
 // and standard PsTools path.
 
 DeviceProcessEvents
-| where Timestamp > ago(1d)
 | where FileName =~ "psexec.exe" or FileName =~ "psexec64.exe"
-    or ProcessCommandLine has "pstools\\psexec"
-| project Timestamp, DeviceName, AccountName,
-    ProcessCommandLine, InitiatingProcessFileName,
-    InitiatingProcessAccountName
+    or ProcessCommandLine has "pstools\\psexec"
+| where ProcessCommandLine !has @"cmd /c ""net stop SAPHostControl & net start SAPHostControl"" "
+| project Timestamp, ReportId,DeviceName,DeviceId, AccountName,AccountUpn,
+ProcessCommandLine,InitiatingProcessFileName, InitiatingProcessAccountName
 | order by Timestamp desc
 ```
 
 ### Validated Columns
-- [ ] Confirm `vssadmin.exe` + `ntdsutil.exe` command abbreviation patterns against
+- [x] Confirm `vssadmin.exe` + `ntdsutil.exe` command abbreviation patterns against
   tenant baseline before deploying -- legitimate AD backup tooling may also trigger this
-- [ ] Confirm PsExec is/isn\'t part of approved admin tooling in the environment before
+- [x] Confirm PsExec is/isn\'t part of approved admin tooling in the environment before
   deploying as alerting (vs hunting-only)
+We have a custom detection for psexec, but I did modify it to closer resemble this query as ours wasn't returning some events. Here's what our old one looked like, that Garey exclusion should have been removed as well. 
 
+DeviceProcessEvents
+| where InitiatingProcessVersionInfoProductName == "Sysinternals PsExec"
+| where ProcessCommandLine !has '"cmd" /c "net stop SAPHostControl & net start SAPHostControl"'
+| where AccountName !has 'gfillo' // exclude Garey whilst he's doing some testing. Commented this out, as I thought it would be better to just suppress the alert. Aug 7th 2025 dcc
+
+Hide full query
 ---
 
 ## Hardening Best Practices Worth Reviewing
@@ -144,7 +150,7 @@ The guide\'s hardening section maps onto several existing or partially-existing 
 ## Actions
 
 - [ ] Build and validate the `ntdsutil.exe` NTDS.dit extraction detection stub
-- [ ] Build and validate the PsExec.exe specific-signature detection stub
+- [x] Build and validate the PsExec.exe specific-signature detection stub
 - [ ] Confirm ESENT Application Log Event IDs (216, 325-327) are captured for domain controllers
 - [ ] Review domain admin login restriction posture against the guide\'s recommendation
 - [ ] Consider Sysmon OriginalFileName renamed-LOLBin detection as a future hunting query

@@ -8,13 +8,13 @@ vendor: GreyNoise
 eval_status: POC
 tags:
   - "#project"
-  - "#status/active"
+  - "#status/done"
   - "#vendor"
   - "#detection"
   - "#identity"
   - "#endpoint"
   - "#ot-scada"
-  - "#action-required"
+  - 
 ---
 
 # Project — GreyNoise POC

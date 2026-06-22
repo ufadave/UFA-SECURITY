@@ -7,11 +7,11 @@ detection_candidate: true
 tags:
   - "#resource"
   - "#vendor"
-  - "#status/active"
+  - "#status/done"
   - "#identity"
   - "#cloud"
   - "#email"
-  - "#action-required"
+  
 ---
 
 # RESEARCH — AI Assistant Comparison: ChatGPT/Codex M365 Connector vs Microsoft 365 Copilot for Office
