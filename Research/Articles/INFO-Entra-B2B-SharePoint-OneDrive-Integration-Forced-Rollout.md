@@ -86,6 +86,6 @@ B2B guest account. Look at the "User E-mail" column per Microsoft guidance.
 
 ## Changelog
 
-| Date | Change |
-|------|--------|
-| 2026-06-19 | Created -- forced B2B rollout, July 2026 hard cutoff for legacy OTP guests; tagged #action-required |
+| Date       | Change                                                                              |
+| ---------- | ----------------------------------------------------------------------------------- |
+| 2026-06-19 | Created -- forced B2B rollout, July 2026 hard cutoff for legacy OTP guests; tagged  |
