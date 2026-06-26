@@ -10,7 +10,7 @@ mitre:
 detection_candidate: true
 tags:
   - "#intel"
-  - "#status/draft"
+  - "#status/done"
   - "#email"
   - "#identity"
 ---
@@ -121,27 +121,28 @@ EmailEvents
     | where ActionType == "ClickAllowed"
 ) on NetworkMessageId
 | project Timestamp, SenderFromAddress, RecipientEmailAddress,
-    Subject, UrlDomain, Url, IsClickedThrough
+    Subject, Url, IsClickedThrough
 | order by Timestamp desc
 ```
 
 ### Validated Columns
-- [ ] `IsClickedThrough` -- requires `tobool()` cast per schema notes
-- [ ] `UrlCount` -- requires `toint()` cast per schema notes
-- [ ] `UrlDomain` -- confirm field exists in UrlClickEvents (vs `Url`)
+- [x] `IsClickedThrough` -- requires `tobool()` cast per schema notes
+- [x] `UrlCount` -- requires `toint()` cast per schema notes
+- [x] `UrlDomain` -- confirm field exists in UrlClickEvents (vs `Url`)Field does not exist. 
+-
 
 ---
 
 ## Hardening Actions
 
-- [ ] **Review MDO Safe Links policy** -- confirm "Do not track when users click safe links"
-  is disabled (tracking required for ClickedThrough detection)
-- [ ] **Enable "Block the following URLs" list** in Safe Links for known-bad BitB infrastructure
+- [x] **Review MDO Safe Links policy** -- confirm "Do not track when users click safe links"
+  is disabled (tracking required for ClickedThrough detection) ** I don't see that option. 
+- [x] **Enable "Block the following URLs" list** in Safe Links for known-bad BitB infrastructure
   once IOCs are extracted from the Unit 42 file
 - [ ] **Phishing simulation training** -- run a BitB-style phishing simulation to test user
   awareness of the draggable OAuth popup technique; standard URL-bar training is insufficient
-  against this class of attack
-- [ ] **Fetch IOCs from Unit 42 GitHub file** -- the .txt file contains specific domains, IPs,
+  against this class of attack - Not sure if that is even possible
+- [x] **Fetch IOCs from Unit 42 GitHub file** -- the .txt file contains specific domains, IPs,
   and hashes for this campaign; load into MDO block lists and Cisco Secure Access
 
 ---
