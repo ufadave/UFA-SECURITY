@@ -4,9 +4,9 @@ date: 2026-06-16
 source: "https://trustedsec.com/blog/the-privileged-roles-nobody-talks-about"
 tags:
   - "#resource"
-  - "#status/draft"
+  - "#status/done"
   - "#identity"
-  - "#action-required"
+  
 ---
 
 # INFO -- TrustedSec: The Privileged Entra ID Roles Nobody Talks About
